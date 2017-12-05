@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "2.4.2"
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -28,7 +30,22 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+################
+#Amazon Web Service gem
+gem 'aws-sdk', '~> 2.3'
+#Paperclip for photo attachments
+gem 'paperclip'
+#rmagick and minimagick are wrappers for imagemagick
+gem 'rmagick', '~> 2.15', '>= 2.15.4'
+gem "mini_magick"
+# OCR space interfaces with the ocr space API
+gem 'ocr_space'
+#BOOTSTRAP STUFF
+gem 'bootstrap', '~> 4.0.0.beta2'
+gem 'jquery-rails'
+gem 'pry'
+################
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
