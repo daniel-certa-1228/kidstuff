@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :children
   resources :users
   resources :activities
   resources :assignments
