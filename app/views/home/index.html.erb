@@ -1,1 +1,7 @@
-<h1>Home</h1>
+<% if logged_in? %>
+    <h1>Kidstuff Home</h1>
+<% else %>
+    <h1>Welcome to Kidstuff!</h1>
+    <%= link_to 'Login', login_path, {:class => "btn btn-dark btn-block"}  %>
+    <%= link_to 'Sign Up', signup_path, {:class => "btn btn-dark btn-block"}  %>
+<% end %>
