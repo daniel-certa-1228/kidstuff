@@ -1,7 +1,20 @@
 <% if logged_in? %>
-    <h1>Kidstuff Home</h1>
+    
+    <div class="container container-center">
+        <h2>Kid Stuff Home</h2>
+        <%= flash[:notice] %>
+        <%= link_to 'Art', root_path, {:class => "btn btn-dark btn-block"}  %>
+        <%= link_to 'Homework', root_path, {:class => "btn btn-dark btn-block"}  %>
+        <%= link_to 'Activities', root_path, {:class => "btn btn-dark btn-block"}  %>
+    </div>
+
 <% else %>
-    <h1>Welcome to Kidstuff!</h1>
-    <%= link_to 'Login', login_path, {:class => "btn btn-dark btn-block"}  %>
-    <%= link_to 'Sign Up', signup_path, {:class => "btn btn-dark btn-block"}  %>
+
+    <div class="container container-center">
+        <h2>Welcome to Kid Stuff!</h2>
+        <%= flash[:notice] %>
+        <%= link_to 'Login', login_path, {:class => "btn btn-dark btn-block"}  %>
+        <%= link_to 'Sign Up', signup_path, {:class => "btn btn-dark btn-block"}  %>
+    </div>
+
 <% end %>

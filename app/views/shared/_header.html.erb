@@ -11,10 +11,16 @@
             <!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Add a Child</a>
+            <%= link_to 'Add a Child', new_child_path, {:class => "nav-link"} %>
+           <!-- > <a class="nav-link" href="#">Add a Child</a> -->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">See All Children</a>
+           <!-- <a class="nav-link" href="#">See All Children</a> -->
+            <%= link_to 'See All Children', children_path, {:class => "nav-link"} %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'User Profile', user_path(@current_user.id), {:class => "nav-link"} %>
+            <!-- <a class="nav-link" href="#">User Profile</a> -->
           </li>
           <li class="nav-item">
             <%= link_to 'Logout', logout_path, {:class => "nav-link"} %>

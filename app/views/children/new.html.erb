@@ -1,0 +1,56 @@
+<div class="container center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <h2>Add a Child</h2>
+      <%= flash[:notice] %>
+
+        <%= form_with scope: :child, url: children_path, local: true, html: { multipart: true } do |form| %>
+        
+            <% if @child.errors.any? %>
+                <div id="error_explanation" class="alert alert-danger">
+                <h2>
+                    <%= pluralize(@child.errors.count, "error") %> prohibited
+                    this profile from being saved:
+                </h2>
+                <ul>
+                    <% @child.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                    <% end %>
+                </ul>
+                </div>
+            <% end %>
+
+            <%= form.hidden_field :user_id, :value => session[:user_id] %>
+
+            <p>
+                <%= form.label :child_name %><br>
+                <%= form.text_field :child_name, class: "form-control"  %>
+            </p>
+
+            <p>
+                <%= form.label :birthday %><br>
+                <%= form.date_field :birthday, class: "form-control"  %>
+            </p>
+            
+            <p>
+            <%= form.label :grade_level %><br>
+                <%= form.select(:grade_level, include_blank: true) do %>
+                    <%= content_tag(:option, "Select Grade Level", value: "") %>
+                    <%= content_tag(:option, "Kindergarten", value: 0) %>
+                    <%= content_tag(:option, "1st", value: 1) %>
+                    <%= content_tag(:option, "2nd", value: 2) %>
+                    <%= content_tag(:option, "3rd", value: 3) %>
+                    <%= content_tag(:option, "4th", value: 4) %>
+                <% end %>
+            </p>
+            
+            <p>
+                <%=  form.submit "Save", class: "btn btn-success" %>
+            </p>
+                
+        <% end %>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="container center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2>User Profile</h2>
+        <br>
+        <p><b>User Name:</b> <%= @user.user_name %></p>
+        <p><b>Email:</b> <%= @user.email %></p>
+        <div>
+        <hr>
+            <%= link_to 'Edit User Name', edit_user_path %>
+        </div>
+    </div>
+  </div>
+</div>

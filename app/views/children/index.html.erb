@@ -1,0 +1,22 @@
+<div class="container center">
+    <% if @children.where({user_id: session[:user_id]}) != [] %>
+    <h2>Children</h2>
+        <% @children.where({user_id: session[:user_id]}).each do |child|%>
+            <div class="row">
+                <div class="card col-md">
+                    <div class="card-block">
+                        <h4 class="card-title"> <%= child[:child_name]%> </h4>
+                        <h6>Birthday: </h6>
+                        <p class="card-text"> <%= child[:birthday] %> </p>
+                        <h6>Grade: </h6>
+                        <p class="card-text"> <%= child[:grade_level] %> </p>
+                    </div>
+                    <%= link_to 'Edit Child', edit_child_path(child.id), {:class => "btn btn-dark"}  %>
+                </div>
+            </div>
+        <% end %>
+    <% else %>
+        <h2>No children added yet!</h2>
+        <%= link_to 'Add a Child', new_child_path, {:class => "btn btn-dark btn-block"}  %>
+    <% end %>
+</div>

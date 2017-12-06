@@ -1,0 +1,48 @@
+<div class="container center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <h2>Edit Child</h2>
+      <%= flash[:notice] %>
+
+      <%= form_for @child do |f| %>
+        <% if @child.errors.any? %>
+          <div class="error_messages">
+            <h2>Form is invalid</h2>
+            <ul>
+              <% @child.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <b><%= f.label :child_name %>:</b><br />
+          <%= f.text_field :child_name, class: "form-control" %>
+        </div>
+        <br>
+        <div class="field">
+            <%= f.label :birthday %><br>
+            <%= f.date_field :birthday, class: "form-control"  %>
+        </div>
+        <div class="field">
+            <%= f.label :grade_level %><br>
+                <%= f.select(:grade_level, include_blank: false) do %>
+                    <%= content_tag(:option, "Select Grade Level", value: "") %>
+                    <%= content_tag(:option, "Kindergarten", value: 0) %>
+                    <%= content_tag(:option, "1st", value: 1) %>
+                    <%= content_tag(:option, "2nd", value: 2) %>
+                    <%= content_tag(:option, "3rd", value: 3) %>
+                    <%= content_tag(:option, "4th", value: 4) %>
+                <% end %>
+        </div>
+
+        <p>
+          <div class="actions"><%= f.submit "Save", class: "btn btn-primary" %></div>
+        </p>
+      <% end %>
+      
+    </div>
+  </div>
+</div>
