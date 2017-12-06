@@ -1,0 +1,20 @@
+
+<div class="container center">
+    <% if @activities.where({user_id: session[:user_id]}) != [] %>
+    
+        <%= form_tag('/activities/search', method: "get", id: "searchbar", class: "form-inline") do %>
+
+        <%= text_field_tag(:search_string, nil, class: 'form-control', placeholder: 'Search Activities', id: 'activitysearch-input')%>
+
+        <% end %>
+  
+        <h2>Activities</h2>
+
+        <%= render partial: 'activity_card' %>
+    <% else %>
+
+        <h2>No Activities added yet!</h2>
+        <%= link_to 'Add Activity', new_activity_path, {:class => "btn btn-dark btn-block"}  %>
+        
+    <% end %>
+</div>

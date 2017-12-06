@@ -37,11 +37,12 @@
             <%= form.label :grade_level %><br>
                 <%= form.select(:grade_level, include_blank: true) do %>
                     <%= content_tag(:option, "Select Grade Level", value: "") %>
-                    <%= content_tag(:option, "Kindergarten", value: 0) %>
-                    <%= content_tag(:option, "1st", value: 1) %>
-                    <%= content_tag(:option, "2nd", value: 2) %>
-                    <%= content_tag(:option, "3rd", value: 3) %>
-                    <%= content_tag(:option, "4th", value: 4) %>
+                    <%= content_tag(:option, "Pre-K", value: "Pre-K") %>
+                    <%= content_tag(:option, "Kindergarten", value: "Kindergarten") %>
+                    <%= content_tag(:option, "1st", value: "1") %>
+                    <%= content_tag(:option, "2nd", value: "2") %>
+                    <%= content_tag(:option, "3rd", value: "3") %>
+                    <%= content_tag(:option, "4th", value: "4") %>
                 <% end %>
             </p>
             
