@@ -67,9 +67,9 @@ class ActivitiesController < ApplicationController
         @content = params[:activity][:content]
         @date = params[:activity][:date]
         @time = params[:activity][:time]
-        @attachment = params[:activity][:id]
+        @attachment = params[:activity][:attachment_id]
         ActivityMailer.activity_mail(@email, @description, @content, @date, @time, @attachment).deliver_later
-        redirect_to docs_path
+        redirect_to activities_path
         File.delete("#{@attachment}.pdf")
     end
 

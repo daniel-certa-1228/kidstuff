@@ -1,0 +1,32 @@
+<div class="container center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2>Send a PDF</h2>
+        <br>
+        <p><b>Title:</b> <%= @activity.title %></p>
+        <p><b>Child:</b> <%= @activity.child_id %></p>
+        <p><b>Date:</b> <%= @activity.date%></p>
+        <p><b>Time:</b> <%= @activity.time%></p>
+
+        <%= form_with scope: :activity, url: 'mail_it', local: true, html: { multipart: true } do |form| %>
+      
+            <%= image_tag @activity.avatar.url(:med) %><br>
+
+            <p>
+            <%= form.label :email %><br>
+            <%= form.text_field :email, class: "form-control"  %>
+            </p>
+
+            <%= form.hidden_field :title, :value => @activity.title %>
+            <%= form.hidden_field :content, :value => @activity.content %>
+            <%= form.hidden_field :date, :value => @activity.date %>
+            <%= form.hidden_field :time, :value => @activity.time %>
+            <%= form.hidden_field :attachment_id, :value => @activity.id %>
+            
+
+            <%=  form.submit "Send", class: "btn btn-success" %>
+        
+      <% end %>
+    </div>
+  </div>
+</div>
