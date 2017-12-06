@@ -43,7 +43,7 @@ class ActivitiesController < ApplicationController
 
     def search
         @search = params[:search_string]
-        @activity = Activity.fuzzy_content_search(@search)
+        @activities= Activity.fuzzy_content_search(@search)
         render 'search'
     end
 
@@ -61,15 +61,17 @@ class ActivitiesController < ApplicationController
         @new_pdf.write("#{@activity.id}.pdf")
     end
 
-    # def mail_it
-    #     @email = params[:doc][:email]
-    #     @description = params[:doc][:description]
-    #     @content = params[:doc][:content]
-    #     @attachment = params[:doc][:description]
-    #     ActivityMailer.activity_mail(@email, @description, @content, @attachment).deliver_later
-    #     redirect_to docs_path
-    #     File.delete("#{@attachment}.pdf")
-    # end
+    def mail_it
+        @email = params[:activity][:email]
+        @description = params[:activity][:title]
+        @content = params[:activity][:content]
+        @date = params[:activity][:date]
+        @time = params[:activity][:time]
+        @attachment = params[:activity][:id]
+        ActivityMailer.activity_mail(@email, @description, @content, @date, @time, @attachment).deliver_later
+        redirect_to docs_path
+        File.delete("#{@attachment}.pdf")
+    end
 
     private
     def activity_params

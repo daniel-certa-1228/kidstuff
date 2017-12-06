@@ -1,0 +1,19 @@
+<div class="container center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2>Activity</h2>
+        <br>
+        <p><b>Title:</b> <%= @activity.title %></p>
+        <p><b>Child:</b> <%= @activity.child_id %></p>
+        <p><b>Date:</b> <%= @activity.date%></p>
+        <p><b>Time:</b> <%= @activity.time%></p>
+        <%= image_tag @activity.avatar.url(:original), class: "img-fluid" %><br>
+        <div>
+        <hr>
+            <%= link_to 'Edit Activity', edit_activity_path %>
+            <%= link_to 'Delete Activity', activity_path(@activity), method: :delete, data: {confirm: 'Are you sure you want to delete this Activity?'} %>
+
+        </div>
+    </div>
+  </div>
+</div>

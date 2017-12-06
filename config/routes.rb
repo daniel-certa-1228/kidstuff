@@ -30,8 +30,8 @@ Rails.application.routes.draw do
   get 'activities/search', to: 'activity#search', as: 'activity_search'
 #email preview routing
   get 'artworks/send_jpg/:id', to: 'artworks#send_jpg', as: 'send_art'
-  get 'assignments/send_jpg/:id', to: 'assignments#send_jpg', as: 'send_assignment'
-  get 'activities/send_pdf/:id', to: 'activities#send_jpg', as: 'send_activity'
+  get 'assignments/send_pdf/:id', to: 'assignments#send_pdf', as: 'send_assignment'
+  get 'activities/send_pdf/:id', to: 'activities#send_pdf', as: 'send_activity'
 #mail routing
   post '/artworks/send_jpg/mail_it', to: 'artworks#mail_it', as: 'mail_artwork'
   post '/assignments/send_pdf/mail_it', to: 'assignments#mail_it', as: 'mail_assignment'
