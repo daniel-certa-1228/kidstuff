@@ -1,0 +1,15 @@
+<div class="container center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2>Child Profile</h2>
+        <br>
+        <p><b>Child Name:</b> <%= @child.child_name %></p>
+        <p><b>Birthday:</b> <%= @child.birthday %></p>
+        <p><b>Grade:</b> <%= @child.grade_level%></p>
+        <div>
+        <hr>
+            <%= link_to 'Edit Child Info', edit_child_path %>
+        </div>
+    </div>
+  </div>
+</div>

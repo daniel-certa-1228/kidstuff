@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20171205204923) do
   create_table "children", force: :cascade do |t|
     t.string "child_name", null: false
     t.datetime "birthday"
+    t.integer "grade_level"
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_children_on_user_id"
   end
