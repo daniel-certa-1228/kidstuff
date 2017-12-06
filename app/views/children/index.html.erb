@@ -3,7 +3,7 @@
     <h2>Children</h2>
         <% @children.where({user_id: session[:user_id]}).each do |child|%>
             <div class="row">
-                <div class="card col-md">
+                <div class="card-block col-md">
                     <div class="card-block">
                         <h4 class="card-title"> <%= child[:child_name]%> </h4>
                         <h6>Birthday: </h6>

@@ -16,16 +16,37 @@ ActiveRecord::Schema.define(version: 20171205204923) do
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
+    t.string "title"
+    t.datetime "date"
+    t.datetime "time"
+    t.string "content"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "artworks", force: :cascade do |t|
+    t.string "title"
+    t.datetime "date"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "assignments", force: :cascade do |t|
+    t.string "title"
+    t.datetime "due_date"
+    t.string "content"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
