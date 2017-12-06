@@ -24,8 +24,12 @@ ActiveRecord::Schema.define(version: 20171205204923) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.bigint "child_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_activities_on_child_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "artworks", force: :cascade do |t|
@@ -35,8 +39,12 @@ ActiveRecord::Schema.define(version: 20171205204923) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.bigint "child_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_artworks_on_child_id"
+    t.index ["user_id"], name: "index_artworks_on_user_id"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -47,8 +55,12 @@ ActiveRecord::Schema.define(version: 20171205204923) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.bigint "child_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_assignments_on_child_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
   create_table "children", force: :cascade do |t|
@@ -67,5 +79,8 @@ ActiveRecord::Schema.define(version: 20171205204923) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "activities", "users"
+  add_foreign_key "artworks", "users"
+  add_foreign_key "assignments", "users"
   add_foreign_key "children", "users"
 end
