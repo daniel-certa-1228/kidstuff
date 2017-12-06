@@ -3,59 +3,63 @@ require 'rmagick'
 require "mini_magick"
 
 class ActivitiesController < ApplicationController
-    # def index
-    #     @activities = Activity.all
-    # end
 
-    # def create
-    #     @doc = Activity.new(doc_params)
-    #     to_text
-    #     if @doc.save
-    #         redirect_to docs_path
-    #     else
-    #         render 'new'
-    #     end
-    # end
+    def new
+        @activity = Activity.new
+    end
 
-    # def update
-    #     @doc = Activity.find(params[:id])
-    #     if @doc.update(customer_params)
-    #         redirect_to @doc
-    #     else
-    #         render 'edit'
-    #     end
-    # end
+    def index
+        @activities = Activity.all
+    end
 
-    # def show
-    #     @doc = Activity.find(params[:id])
-    # end
+    def create
+        @activity = Activity.new(activity_params)
+        to_text
+        if @activity.save
+            redirect_to activities_path
+        else
+            render 'new'
+        end
+    end
 
-    # def destroy
-    #     @doc = Activity.find(params[:id])
-    #     @doc.destroy
-    #     redirect_to root_path
-    # end
+    def update
+        @activity = Activity.find(params[:id])
+        if @activity.update(activity_params)
+            redirect_to @activity
+        else
+            render 'edit'
+        end
+    end
 
-    # def search
-    #     @search = params[:search_string]
-    #     @docs = Activity.fuzzy_content_search(@search)
-    #     render 'search'
-    # end
+    def show
+        @activity = Activity.find(params[:id])
+    end
 
-    # def send_pdf
-    #     @doc = Activity.find(params[:id])
+    def destroy
+        @activity = Activity.find(params[:id])
+        @activity.destroy
+        redirect_to activities_path
+    end
 
-    #     s3 = Aws::S3::Client.new(
-    #         region: ENV.fetch('AWS_REGION'),
-    #         access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
-    #         secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY')
-    #       )
+    def search
+        @search = params[:search_string]
+        @activity = Activity.fuzzy_content_search(@search)
+        render 'search'
+    end
 
-    #     @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "docs/#{@doc.id}.original.JPG")
-    #     @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
-    #     @new_pdf.write("#{@doc.description}.pdf")
-        
-    # end
+    def send_pdf
+        @activity = Activity.find(params[:id])
+
+        s3 = Aws::S3::Client.new(
+            region: ENV.fetch('AWS_REGION'),
+            access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
+            secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY')
+          )
+
+        @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "activities/#{@activity.id}.original.JPG")
+        @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
+        @new_pdf.write("#{@activity.id}.pdf")
+    end
 
     # def mail_it
     #     @email = params[:doc][:email]
@@ -67,15 +71,15 @@ class ActivitiesController < ApplicationController
     #     File.delete("#{@attachment}.pdf")
     # end
 
-    # private
-    # def doc_params
-    #     params.require(:activity).permit(:description, :date, :time, :content, :avatar, :user_id )
-    # end
+    private
+    def activity_params
+        params.require(:activity).permit(:title, :date, :time, :content, :avatar, :child_id, :user_id )
+    end
 
-    # def to_text
-    #     image = MiniMagick::Image.new(params[:activity][:avatar].path)
-    #     image = image.resize "1200x1800"
-    #     resource = OcrSpace::Resource.new(apikey: "0cf421d36788957")
-    #     @doc.content = resource.clean_convert file: image.path
-    # end
+    def to_text
+        image = MiniMagick::Image.new(params[:activity][:avatar].path)
+        image = image.resize "1200x1800"
+        resource = OcrSpace::Resource.new(apikey: ENV.fetch('OCR_API_KEY'))
+        @activity.content = resource.clean_convert file: image.path
+    end
 end

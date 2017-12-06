@@ -1,0 +1,50 @@
+<div class="container center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <h2>New Activity</h2>
+
+        <%= form_with scope: :activity, url: activities_path, local: true, html: { multipart: true } do |form| %>
+            <%= form.hidden_field :user_id, :value => session[:user_id] %>
+            <p>
+            <%= form.label :title %><br>
+            <%= form.text_field :title, class: "form-control"  %>
+            </p>
+
+            <p>
+            <%= form.select(:child_id, include_blank: true) do %>
+                <%= content_tag(:option, "Select a Child", value: "") %>
+                <% Child.all.each do |c| -%>
+                <%= content_tag(:option, c.child_name, value: c.id) %>
+                <% end %>
+            <% end %>
+            </p>
+
+            <p>
+            <%= form.label :date %><br>
+            <%= form.date_field :date, class: "form-control"  %>
+            </p>
+
+            <p>
+            <%= form.label :time %><br>
+            <%= form.time_field :time, class: "form-control"  %>
+            </p>
+
+            <p>
+            <%= form.label "Scan" %><br>
+            <%= form.file_field :avatar %>
+            </p>
+
+            <p>
+                <%= form.hidden_field :content %>
+            </p>
+            <p>
+            <%=  form.submit "Save", class: "btn btn-success" %>
+            </p>
+        <% end %>
+
+        <!-- <%= link_to 'Home', root_path %> -->
+
+    </div>
+  </div>
+</div>

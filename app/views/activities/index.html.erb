@@ -1,0 +1,27 @@
+<div class="container center">
+    <% if @activities.where({user_id: session[:user_id]}) != [] %>
+    <h2>Activities</h2>
+        <% @activities.where({user_id: session[:user_id]}).each do |activity|%>
+            <div class="row">
+                <div class="card-block col-md">
+                    <div class="card-block">
+                        <h4 class="card-title"> <%= activity[:title]%> </h4>
+                        <h6>Child: </h6>
+                        <p class="card-text"> <%= activity[:child_id] %> </p>
+                        <h6>Date: </h6>
+                        <p class="card-text"> <%= activity[:date] %> </p>
+                        <h6>Time: </h6>
+                        <p class="card-text"> <%= activity[:time] %> </p>
+                        <h6>Content: </h6>
+                        <p class="card-text"> <%= activity[:content] %> </p>
+                        <%= link_to (image_tag activity.avatar.url(:med)), activity_path(activity) %><br>
+                    </div>
+                    
+                </div>
+            </div>
+        <% end %>
+    <% else %>
+        <h2>No Activities added yet!</h2>
+        <%= link_to 'Add Activity', new_activity_path, {:class => "btn btn-dark btn-block"}  %>
+    <% end %>
+</div>

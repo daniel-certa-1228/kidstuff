@@ -1,0 +1,2 @@
+class ArtMailer < ApplicationMailer
+end
