@@ -1,7 +1,9 @@
 <div class="container center">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <h2>Sign Up</h2>
+    <header>
+      <h2 class="main-h2">Sign Up</h2>
+    </header>
 
       <%= form_for @user do |f| %>
         <% if @user.errors.any? %>
@@ -32,7 +34,7 @@
           <%= f.text_field :user_name, class: "form-control" %>
         </div>
         <p>
-          <div class="actions"><%= f.submit "Sign Up", class: "btn btn-primary" %></div>
+          <div class="actions"><%= f.submit "Sign Up", class: "btn btn-success btn-block" %></div>
         </p>
       <% end %>
     </div>

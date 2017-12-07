@@ -9,3 +9,21 @@
 .container {
     padding-bottom: 40px;
 }
+
+.btn-group.block {
+    display: flex;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+  
+.block .btn {
+    flex: 1
+}
+
+.main-h2 {
+    margin-bottom: 0;
+}
+
+header {
+    text-align: center;
+}

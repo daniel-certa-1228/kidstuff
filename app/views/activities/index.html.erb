@@ -1,14 +1,18 @@
 
 <div class="container center">
+    <header>
+        <h2 class="main-h2">Activities</h2>
+    </header>
     <% if @activities.where({user_id: session[:user_id]}) != [] %>
-    
+        <!-- Search Input-->
         <%= form_tag('/activities/search', method: "get", id: "searchbar", class: "form-inline") do %>
-
-        <%= text_field_tag(:search_string, nil, class: 'form-control', placeholder: 'Search Activities', id: 'activitysearch-input')%>
-
+            <%= text_field_tag(:search_string, nil, class: 'form-control', placeholder: 'Search Activities', id: 'activitysearch-input')%>
         <% end %>
-  
-        <h2>Activities</h2>
+        <!-- Button Group-->
+        <div class="btn-group block" role="group" aria-label="...">
+            <%= link_to "Add New", new_activity_path, :class => "btn btn-dark ass-button" %>
+            <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
+        </div>
 
         <%= render partial: 'activity_card' %>
     <% else %>

@@ -1,8 +1,14 @@
 <div class="container center">
   <div class="row justify-content-center">
     <div class="col-md-8">
-
-      <h2>Edit Child</h2>
+      <header>
+        <h2 class="main-h2">Edit Child</h2> 
+      </header>    
+      
+      <div class="btn-group block" role="group" aria-label="...">
+          <%= link_to "All Children", children_path, :class => "btn btn-dark ass-button" %>
+          <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
+      </div>
       <%= flash[:notice] %>
 
       <%= form_for @child do |f| %>
@@ -23,11 +29,11 @@
         </div>
         <br>
         <div class="field">
-            <%= f.label :birthday %><br>
+            <b><%= f.label :birthday %>:</b><br>
             <%= f.date_field :birthday, class: "form-control"  %>
         </div>
         <div class="field">
-            <%= f.label :grade_level %><br>
+            <b><%= f.label :grade_level %>:</b><br>
                 <%= f.select(:grade_level, include_blank: false) do %>
                     <%= content_tag(:option, "Select Grade Level", value: "") %>
                     <%= content_tag(:option, "Pre-K", value: "Pre-K") %>
@@ -40,7 +46,7 @@
         </div>
 
         <p>
-          <div class="actions"><%= f.submit "Save", class: "btn btn-primary" %></div>
+          <div class="actions"><%= f.submit "Save", class: "btn btn-success btn-block" %></div>
         </p>
       <% end %>
       
