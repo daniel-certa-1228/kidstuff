@@ -9,10 +9,6 @@
                 <p class="card-text"> <%= activity[:date] %> </p>
                 <h6>Time: </h6>
                 <p class="card-text"> <%= activity[:time] %> </p>
-                <!--
-                <h6>Content: </h6>
-                <p class="card-text"> <%= activity[:content] %> </p>
-                -->
                 <%= link_to (image_tag activity.avatar.url(:sm)), activity_path(activity) %><br>
             </div>
             

@@ -2,7 +2,9 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
         <%= flash[:notice] %>
-            <h1>Log In</h1>
+        <header>
+            <h2 class="main-h2">Log In</h2>
+        </header>
 
             <%= form_tag sessions_path do %>
             <div class="field">
@@ -14,7 +16,7 @@
                 <%= password_field_tag :password, nil, class:'form-control'  %>
             </div>
             <p>
-                <div class="actions"><%= submit_tag "Log In", class: "btn btn-primary" %></div>
+                <div class="actions"><%= submit_tag "Log In", class: "btn btn-success btn-block" %></div>
             </p>
             <% end %>
         </div>

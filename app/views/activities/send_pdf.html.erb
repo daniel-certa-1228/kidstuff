@@ -1,8 +1,15 @@
 <div class="container center">
   <div class="row justify-content-center">
     <div class="col-md-8">
-        <h2>Send a PDF</h2>
-        <br>
+      <header>
+        <h2 class="main-h2">Send a PDF</h2>
+      </header>
+
+      <div class="btn-group block" role="group" aria-label="...">
+          <%= link_to "Back", activity_path(@activity), :class => "btn btn-dark ass-button" %>
+          <%= link_to "Home", activities_path, :class => "btn btn-outline-dark ass-button" %>
+      </div>
+        
         <p><b>Title:</b> <%= @activity.title %></p>
         <p><b>Child:</b> <%= @activity.child_id %></p>
         <p><b>Date:</b> <%= @activity.date%></p>
@@ -23,8 +30,7 @@
             <%= form.hidden_field :time, :value => @activity.time %>
             <%= form.hidden_field :attachment_id, :value => @activity.id %>
             
-
-            <%=  form.submit "Send", class: "btn btn-success" %>
+            <%=  form.submit "Send", class: "btn btn-success btn-block" %>
         
       <% end %>
     </div>

@@ -1,14 +1,20 @@
 <div class="container center">
   <div class="row justify-content-center">
     <div class="col-md-8">
-        <h2>Child Profile</h2>
-        <br>
+        <header>
+          <h2 class="main-h2">Child Profile</h2>
+        </header>
+
+        <div class="btn-group block" role="group" aria-label="...">
+            <%= link_to "All Children", children_path, :class => "btn btn-dark ass-button" %>
+            <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
+        </div>
         <p><b>Child Name:</b> <%= @child.child_name %></p>
         <p><b>Birthday:</b> <%= @child.birthday %></p>
         <p><b>Grade:</b> <%= @child.grade_level%></p>
         <div>
         <hr>
-            <%= link_to 'Edit Child Info', edit_child_path %>
+            <%= link_to 'Edit Child Info', edit_child_path, class: "btn btn-primary btn-block" %>
         </div>
     </div>
   </div>
