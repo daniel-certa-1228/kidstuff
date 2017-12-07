@@ -58,7 +58,7 @@ class ActivitiesController < ApplicationController
 
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "activities/#{@activity.id}.original.JPG")
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
-        @new_pdf.write("#{@activity.id}.pdf")
+        @new_pdf.write("kidstuff_activity_#{@activity.id}.pdf")
     end
 
     def mail_it
@@ -67,10 +67,10 @@ class ActivitiesController < ApplicationController
         @content = params[:activity][:content]
         @date = params[:activity][:date]
         @time = params[:activity][:time]
-        @attachment = params[:activity][:attachment_id]
+        @attachment = "kidstuff_activity_#{params[:activity][:attachment_id]}.pdf"
         ActivityMailer.activity_mail(@email, @description, @content, @date, @time, @attachment).deliver_later
         redirect_to activities_path
-        File.delete("#{@attachment}.pdf")
+        File.delete("#{@attachment}")
     end
 
     private
