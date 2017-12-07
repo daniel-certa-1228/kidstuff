@@ -1,2 +1,89 @@
+require 'ocr_space'
+require 'rmagick'
+require "mini_magick"
+
 class AssignmentsController < ApplicationController
+    def new
+        @assignment = Assignment.new
+    end
+
+    def index
+        @assignment = Assignment.all
+    end
+
+    def create
+        @assignment = Assignment.new(activity_params)
+        to_text
+        if @assignment.save
+            redirect_to assignments_path
+        else
+            render 'new'
+        end
+    end
+
+    def edit
+        @assignment = Assignment.find(params[:id])
+    end
+
+    def update
+        @assignment = Assignment.find(params[:id])
+        if @assignment.update(assignment_params)
+            redirect_to @assignment
+        else
+            render 'edit'
+        end
+    end
+
+    def show
+        @assignment = Assignment.find(params[:id])
+    end
+
+    def destroy
+        @assignment = Assignment.find(params[:id])
+        @assignment.destroy
+        redirect_to assignments_path
+    end
+
+    def search
+        @search = params[:search_string]
+        @assignments= Assignment.fuzzy_content_search(@search)
+        render 'search'
+    end
+
+    def send_pdf
+        @assignment = Assignment.find(params[:id])
+
+        s3 = Aws::S3::Client.new(
+            region: ENV.fetch('AWS_REGION'),
+            access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
+            secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY')
+          )
+
+        @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "assignments/#{@assignment.id}.original.JPG")
+        @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
+        @new_pdf.write("kidstuff_activity_#{@assignment.id}.pdf")
+    end
+
+    def mail_it
+        @email = params[:activity][:email]
+        @description = params[:activity][:title]
+        @content = params[:activity][:content]
+        @due_date = params[:activity][:due_date]
+        @attachment = "kidstuff_assignment_#{params[:activity][:attachment_id]}.pdf"
+        AssignmentMailer.assignment_mail(@email, @description, @content, @due_date, @attachment).deliver_later
+        redirect_to assignments_path
+        File.delete("#{@attachment}")
+    end
+
+    private
+    def activity_params
+        params.require(:activity).permit(:title, :due_date, :content, :avatar, :child_id, :user_id )
+    end
+
+    def to_text
+        image = MiniMagick::Image.new(params[:assignment][:avatar].path)
+        image = image.resize "1200x1800"
+        resource = OcrSpace::Resource.new(apikey: ENV.fetch('OCR_API_KEY'))
+        @assignment.content = resource.clean_convert file: image.path
+    end
 end

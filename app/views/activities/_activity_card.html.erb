@@ -1,17 +1,14 @@
 <% @activities.where({user_id: session[:user_id]}).each do |activity|%>
-    <div class="row">
-        <div class="card-block col-md">
-            <div class="card-block">
+    
+        <div class="col-md">
+            <div class="card">
                 <h4 class="card-title"> <%= activity[:title]%> </h4>
-                <h6>Child: </h6>
-                <p class="card-text"> <%= activity[:child_id] %> </p>
-                <h6>Date: </h6>
-                <p class="card-text"> <%= activity[:date] %> </p>
-                <h6>Time: </h6>
-                <p class="card-text"> <%= activity[:time] %> </p>
+                <p class="card-text"><b>Child:</b> <%= activity[:child_id] %> </p>
+                <p class="card-text"><b>Date:</b> <%= activity[:date] %> </p>
+                <p class="card-text"><b>Time:</b> <%= activity[:time] %> </p>
                 <%= link_to (image_tag activity.avatar.url(:sm)), activity_path(activity) %><br>
             </div>
             
         </div>
-    </div>
+    
 <% end %>

@@ -13,8 +13,9 @@
             <%= link_to "Add New", new_activity_path, :class => "btn btn-dark ass-button" %>
             <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
         </div>
-
-        <%= render partial: 'activity_card' %>
+        <div class="row">
+            <%= render partial: 'activity_card' %>
+        </div>
     <% else %>
 
         <h2>No Activities added yet!</h2>
