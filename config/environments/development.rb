@@ -30,7 +30,7 @@ Rails.application.configure do
   domain:               'dancerta.tech',
   user_name:            'kidstuffapp@gmail.com',
   password:             'kidstuff6969',
-  authentication:       'plain',
+  authentication:       :plain,
   enable_starttls_auto: true  }
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
