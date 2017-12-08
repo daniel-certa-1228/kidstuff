@@ -1,6 +1,5 @@
 require 'ocr_space'
 require 'rmagick'
-# require "mini_magick"
 
 class ArtworksController < ApplicationController
     def new
@@ -78,11 +77,4 @@ class ArtworksController < ApplicationController
     def artwork_params
         params.require(:artwork).permit(:title, :date, :avatar, :child_id, :user_id )
     end
-
-    # def to_text
-    #     image = MiniMagick::Image.new(params[:assignment][:avatar].path)
-    #     image = image.resize "1200x1800"
-    #     resource = OcrSpace::Resource.new(apikey: ENV.fetch('OCR_API_KEY'))
-    #     @assignment.content = resource.clean_convert file: image.path
-    # end
 end
