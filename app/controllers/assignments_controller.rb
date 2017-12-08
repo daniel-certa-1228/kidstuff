@@ -36,6 +36,8 @@ class AssignmentsController < ApplicationController
 
     def show
         @assignment = Assignment.find(params[:id])
+        @child = Child.where(id: @assignment.child_id)
+        @child = @child[0].child_name
     end
 
     def destroy

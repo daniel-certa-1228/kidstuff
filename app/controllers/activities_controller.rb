@@ -37,6 +37,8 @@ class ActivitiesController < ApplicationController
 
     def show
         @activity = Activity.find(params[:id])
+        @child = Child.where(id: @activity.child_id)
+        @child = @child[0].child_name
     end
 
     def destroy

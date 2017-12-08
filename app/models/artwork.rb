@@ -5,6 +5,7 @@ class Artwork < ApplicationRecord
     validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
     
     belongs_to :user
+    # belongs_to :child
 
     def self.fuzzy_title_search(search_string)
         search_string = "%" + search_string.downcase + "%"

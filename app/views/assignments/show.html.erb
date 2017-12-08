@@ -11,7 +11,7 @@
         </div>
 
         <p><b>Title:</b> <%= @assignment.title %></p>
-        <p><b>Child:</b> <%= @assignment.child_id %></p>
+        <p><b>Child:</b> <%= @child %></p>
         <p><b>Due Date:</b> <%= @assignment.due_date%></p>
         <%= image_tag @assignment.avatar.url(:original), class: "img-fluid" %><br>
 
