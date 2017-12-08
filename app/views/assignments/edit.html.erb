@@ -44,6 +44,7 @@
 
         <p>
           <div class="actions"><%= f.submit "Save", class: "btn btn-success btn-block" %></div>
+          <%= link_to 'Delete Assignment', assignment_path(@assignment), method: :delete, data: {confirm: 'Are you sure you want to delete this Assignment?'}, class: "btn btn-danger btn-block delete-btn" %>
         </p>
       <% end %>
       

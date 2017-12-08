@@ -58,7 +58,6 @@ class ArtworksController < ApplicationController
           )
 
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "artworks/#{@artwork.id}.original.jpg")
-        # @jpeg.write("kidstuff_artwork_#{@artwork.id}.jpg")
         @saved_jpg = Magick::Image.from_blob(@jpeg.body.read)[0]
         @saved_jpg.write("kidstuff_artwork_#{@artwork.id}.jpg")
     end
