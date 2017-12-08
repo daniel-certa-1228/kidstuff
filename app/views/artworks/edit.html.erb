@@ -2,21 +2,21 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <header>
-        <h2 class="main-h2">Edit Assignment</h2> 
+        <h2 class="main-h2">Edit Artwork</h2> 
       </header>    
       
       <div class="btn-group block" role="group" aria-label="...">
-          <%= link_to "Back", assignment_path(@assignment), :class => "btn btn-dark ass-button" %>
+          <%= link_to "Back", artwork_path(@artwork), :class => "btn btn-dark ass-button" %>
           <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
       </div>
       <%= flash[:notice] %>
 
-      <%= form_for @assignment do |f| %>
-        <% if @assignment.errors.any? %>
+      <%= form_for @artwork do |f| %>
+        <% if @artwork.errors.any? %>
           <div class="error_messages">
             <h2>Form is invalid</h2>
             <ul>
-              <% @assignment.errors.full_messages.each do |message| %>
+              <% @artwork.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
               <% end %>
             </ul>
@@ -38,14 +38,16 @@
             <% end %>
         </div>
         <p>
-            <%= f.label :due_date %><br>
-            <%= f.date_field :due_date, class: "form-control"  %>
+            <%= f.label :date %><br>
+            <%= f.date_field :date, class: "form-control"  %>
         </p>
 
         <p>
           <div class="actions"><%= f.submit "Save", class: "btn btn-success btn-block" %></div>
-          <%= link_to 'Delete Assignment', assignment_path(@assignment), method: :delete, data: {confirm: 'Are you sure you want to delete this Assignment?'}, class: "btn btn-danger btn-block delete-btn" %>
+          <%= link_to 'Delete Artwork', artwork_path(@artwork), method: :delete, data: {confirm: 'Are you sure you want to delete this Artwork?'}, class: "btn btn-danger btn-block delete-btn" %>
+
         </p>
+        
       <% end %>
       
     </div>

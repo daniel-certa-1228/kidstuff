@@ -36,13 +36,31 @@ class ChildrenController < ApplicationController
     end
 
     def destroy
-
+        @child = Child.find(params[:id])
+        nuke_records(@child.id)
+        @child.destroy
+        redirect_to children_path
     end
 
     private
 
         def child_params
             params.require(:child).permit(:child_name, :birthday, :grade_level, :user_id)
+        end
+
+        def nuke_records(child_id)
+            @assignments = Assignment.where(child_id: child_id)
+            @activities = Activity.where(child_id: child_id)
+            @artworks = Artwork.where(child_id: child_id)
+            @artworks.each do |artwork|
+                artwork.destroy
+            end
+            @activities.each do |activity|
+                activity.destroy
+            end
+            @assignments.each do |assignment|
+                assignment.destroy
+            end
         end
 
 end
