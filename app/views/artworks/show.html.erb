@@ -12,12 +12,12 @@
 
         <p><b>Title:</b> <%= @artwork.title %></p>
         <p><b>Child:</b> <%= @artwork.child_id %></p>
-        <p><b>Due Date:</b> <%= @artwork.date%></p>
+        <p><b>Date:</b> <%= @artwork.date%></p>
         <%= image_tag @artwork.avatar.url(:original), class: "img-fluid" %><br>
 
         <div class="btn-group block" role="group" aria-label="...">
-            <%= link_to 'Edit Artwork', edit_artwork_path, :class => "btn btn-dark ass-button"  %>
-            <%= link_to 'Email JPG', send_art_path(@artwork), :class => "btn btn-outline-dark ass-button"  %>
+            <%= link_to 'Edit Artwork', edit_artwork_path, :class => "btn btn-primary ass-button"  %>
+            <%= link_to 'Email JPG', send_art_path(@artwork), :class => "btn btn-outline-primary ass-button"  %>
         </div>
     </div>
   </div>
