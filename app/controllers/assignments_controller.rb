@@ -59,7 +59,7 @@ class AssignmentsController < ApplicationController
             secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY')
           )
 
-        @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "assignments/#{@assignment.id}.original.jpg")
+        @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "assignments/#{@assignment.id}.original.jpg")#jpg needs to be lower case for mobile upload
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
         @new_pdf.write("kidstuff_assignment_#{@assignment.id}.pdf")
     end
