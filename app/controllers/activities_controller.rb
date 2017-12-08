@@ -59,8 +59,8 @@ class ActivitiesController < ApplicationController
             access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
             secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY')
           )
-                                                                                                                            
-        @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "activities/#{@activity.id}.original.jpg")#jpg needs to be lower case for mobile upload
+
+        @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "activities/#{@activity.id}.original.jpg")
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
         @new_pdf.write("kidstuff_activity_#{@activity.id}.pdf")
     end

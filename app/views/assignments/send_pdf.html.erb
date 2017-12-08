@@ -17,7 +17,7 @@
 
         <%= form_with scope: :assignment, url: 'mail_it', local: true, html: { multipart: true } do |form| %>
       
-            <%= image_tag @assignment.avatar.url(:med) %><br>
+            <%= image_tag @assignment.avatar.url(:sm) %><br>
 
             <p>
             <%= form.label :email %><br>

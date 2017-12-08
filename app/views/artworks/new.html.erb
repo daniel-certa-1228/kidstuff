@@ -1,0 +1,47 @@
+<div class="container center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <header>
+            <h2 class="main-h2">New Artwork</h2>
+        </header>
+
+        <div class="btn-group block" role="group" aria-label="...">
+            <%= link_to "Back", artworks_path, :class => "btn btn-dark ass-button" %>
+            <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
+        </div>
+
+        <%= form_with scope: :artwork, url: artworks_path, local: true, html: { multipart: true } do |form| %>
+            <%= form.hidden_field :user_id, :value => session[:user_id] %>
+            <p>
+            <%= form.label :title %><br>
+            <%= form.text_field :title, class: "form-control"  %>
+            </p>
+
+            <p>
+            <%= form.select(:child_id, include_blank: true) do %>
+                <%= content_tag(:option, "Select a Child", value: "") %>
+                <% Child.all.each do |c| -%>
+                <%= content_tag(:option, c.child_name, value: c.id) %>
+                <% end %>
+            <% end %>
+            </p>
+
+            <p>
+            <%= form.label :date %><br>
+            <%= form.date_field :date, class: "form-control"  %>
+            </p>
+
+            <p>
+            <%= form.label "Scan" %><br>
+            <%= form.file_field :avatar %>
+            </p>
+
+            <p>
+            <%=  form.submit "Save", class: "btn btn-success btn-block" %>
+            </p>
+        <% end %>
+
+    </div>
+  </div>
+</div>

@@ -16,9 +16,8 @@
         <%= image_tag @assignment.avatar.url(:original), class: "img-fluid" %><br>
 
         <div class="btn-group block" role="group" aria-label="...">
-            <%= link_to 'Edit Assignment', edit_assignment_path, :class => "btn btn-dark ass-button"  %>
-            <%# <%= link_to 'Delete Activity', assignment_path(@assignment), method: :delete, data: {confirm: 'Are you sure you want to delete this Activity?'} %>
-            <%= link_to 'Email PDF', send_assignment_path(@assignment), :class => "btn btn-outline-dark ass-button"  %>
+            <%= link_to 'Edit Assignment', edit_assignment_path, :class => "btn btn-primary ass-button"  %>
+            <%= link_to 'Email PDF', send_assignment_path(@assignment), :class => "btn btn-outline-primary ass-button"  %>
         </div>
     </div>
   </div>

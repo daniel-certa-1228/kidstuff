@@ -1,0 +1,26 @@
+<div class="container center">
+    <header>
+        <h2 class="main-h2">Artwork</h2>
+    </header>
+    <% if @artworks.where({user_id: session[:user_id]}) != [] %>
+        <!-- Search Input-->
+        <%= form_tag('/artworks/search', method: "get", id: "searchbar", class: "form-inline") do %>
+            <%= text_field_tag(:search_string, nil, class: 'form-control', placeholder: 'Search Artwork by Title', id: 'artworksearch-input')%>
+        <% end %>
+        <!-- Button Group-->
+        <div class="btn-group block" role="group" aria-label="...">
+            <%= link_to "Add New", new_artwork_path, :class => "btn btn-dark ass-button" %>
+            <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
+        </div>
+        <div class="row">
+            <%= render partial: 'artwork_card' %>
+        </div>
+    <% else %>
+        <header>
+            <h4 class="not-yet-message">No Artwork added yet!</h4>
+        </header>
+
+        <%= link_to 'Add Artwork', new_artwork_path, {:class => "btn btn-primary btn-block"}  %>
+        
+    <% end %>
+</div>
