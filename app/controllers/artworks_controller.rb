@@ -1,6 +1,6 @@
 require 'ocr_space'
-# require 'rmagick'
-require "mini_magick"
+require 'rmagick'
+# require "mini_magick"
 
 class ArtworksController < ApplicationController
     def new
@@ -45,7 +45,7 @@ class ArtworksController < ApplicationController
 
     def search
         @search = params[:search_string]
-        @artwork= Artwork.fuzzy_title_search(@search)
+        @artworks= Artwork.fuzzy_title_search(@search)
         render 'search'
     end
 
@@ -58,10 +58,10 @@ class ArtworksController < ApplicationController
             secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY')
           )
 
-        @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "artworks/#{@artwork.id}.original.JPG")
-        @jpeg.write("kidstuff_artwork_#{@artwork.id}.jpg")
-        # @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
-        # @new_pdf.write("kidstuff_assignment_#{@assignment.id}.pdf")
+        @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "artworks/#{@artwork.id}.original.jpg")
+        # @jpeg.write("kidstuff_artwork_#{@artwork.id}.jpg")
+        @saved_jpg = Magick::Image.from_blob(@jpeg.body.read)[0]
+        @saved_jpg.write("kidstuff_artwork_#{@artwork.id}.jpg")
     end
 
     def mail_it
