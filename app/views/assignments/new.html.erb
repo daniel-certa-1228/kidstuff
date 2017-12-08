@@ -3,15 +3,15 @@
     <div class="col-md-8">
 
         <header>
-            <h2 class="main-h2">New Activity</h2>
+            <h2 class="main-h2">New Assignment</h2>
         </header>
 
         <div class="btn-group block" role="group" aria-label="...">
-            <%= link_to "Back", activities_path, :class => "btn btn-dark ass-button" %>
+            <%= link_to "Back", assignments_path, :class => "btn btn-dark ass-button" %>
             <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
         </div>
 
-        <%= form_with scope: :activity, url: activities_path, local: true, html: { multipart: true } do |form| %>
+        <%= form_with scope: :assignment, url: assignments_path, local: true, html: { multipart: true } do |form| %>
             <%= form.hidden_field :user_id, :value => session[:user_id] %>
             <p>
             <%= form.label :title %><br>
@@ -28,13 +28,8 @@
             </p>
 
             <p>
-            <%= form.label :date %><br>
-            <%= form.date_field :date, class: "form-control"  %>
-            </p>
-
-            <p>
-            <%= form.label :time %><br>
-            <%= form.time_field :time, class: "form-control"  %>
+            <%= form.label :due_date %><br>
+            <%= form.date_field :due_date, class: "form-control"  %>
             </p>
 
             <p>

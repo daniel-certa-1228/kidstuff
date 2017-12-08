@@ -1,0 +1,12 @@
+<div class="container center">
+
+    <h2 class="main-h2">Search: '<%= @search %>'</h2>
+
+        <div class="btn-group block" role="group" aria-label="...">
+            <%= link_to "Back", assignments_path, :class => "btn btn-dark ass-button" %>
+            <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
+        </div>
+
+        <%= render partial: 'assignment_card' %>
+
+</div>

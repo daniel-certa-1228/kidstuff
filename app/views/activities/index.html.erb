@@ -17,9 +17,11 @@
             <%= render partial: 'activity_card' %>
         </div>
     <% else %>
+        <header>
+            <h2 class="not-yet-message">No Activities added yet!</h2>
+        </header>
 
-        <h2>No Activities added yet!</h2>
-        <%= link_to 'Add Activity', new_activity_path, {:class => "btn btn-dark btn-block"}  %>
+        <%= link_to 'Add Activity', new_activity_path, {:class => "btn btn-primary btn-block"}  %>
         
     <% end %>
 </div>

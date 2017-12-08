@@ -1,7 +1,11 @@
 <div class="container center">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <h2>Edit User Name</h2>
+    
+      <header>
+        <h2>Edit User Name</h2>
+      </header>
+      
 
       <%= form_for @user do |f| %>
         <% if @user.errors.any? %>
@@ -15,14 +19,14 @@
           </div>
         <% end %>
         <div class="field">
-          <b><%= f.label :user_name %>:</b><br />
+          <%= f.label :user_name %><br />
           <%= f.text_field :user_name, class: "form-control" %>
         </div>
         <br>
-        <p><b>Email:</b> <%= @user.email %></p>
+        <p>Email: <%= @user.email %></p>
 
         <p>
-          <div class="actions"><%= f.submit "Save", class: "btn btn-primary" %></div>
+          <div class="actions"><%= f.submit "Save", class: "btn btn-success btn-block" %></div>
         </p>
       <% end %>
     </div>

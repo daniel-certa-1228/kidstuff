@@ -1,0 +1,37 @@
+<div class="container center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <header>
+        <h2 class="main-h2">Send a PDF</h2>
+      </header>
+
+      <div class="btn-group block" role="group" aria-label="...">
+          <%= link_to "Back", assignment_path(@assignment), :class => "btn btn-dark ass-button" %>
+          <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
+      </div>
+        
+        <p><b>Title:</b> <%= @assignment.title %></p>
+        <p><b>Child:</b> <%= @assignment.child_id %></p>
+        <p><b>Date:</b> <%= @assignment.due_date%></p>
+    
+
+        <%= form_with scope: :assignment, url: 'mail_it', local: true, html: { multipart: true } do |form| %>
+      
+            <%= image_tag @assignment.avatar.url(:med) %><br>
+
+            <p>
+            <%= form.label :email %><br>
+            <%= form.text_field :email, class: "form-control"  %>
+            </p>
+
+            <%= form.hidden_field :title, :value => @assignment.title %>
+            <%= form.hidden_field :content, :value => @assignment.content %>
+            <%= form.hidden_field :date, :value => @assignment.due_date %>
+            <%= form.hidden_field :attachment_id, :value => @assignment.id %>
+            
+            <%=  form.submit "Send", class: "btn btn-success btn-block" %>
+        
+      <% end %>
+    </div>
+  </div>
+</div>
