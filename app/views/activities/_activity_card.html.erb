@@ -3,8 +3,15 @@
         <div class="col-md">
             <div class="card">
                 <h4 class="card-title"> <%= activity[:title]%> </h4>
-                <p class="card-text"><b>Child:</b> <%= (Child.where(id: activity[:child_id])[0].child_name)||activity[:child_id] %> </p>
                 <p class="card-text"><b>Date:</b> <%= activity[:date] %> </p>
+                
+                
+                <% if (activity[:child_id].blank? ) %>
+                   <p class="card-text"><b>Child: </b>n/a</p>
+                <% else %>
+                    <p class="card-text"><b>Child: </b><%= Child.where(id: activity[:child_id])[0].child_name%></p>
+                <%end%>
+
                 <p class="card-text"><b>Time:</b> <%= activity[:time] %> </p>
                 <%= link_to (image_tag activity.avatar.url(:sm)), activity_path(activity) %><br>
             </div>
