@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 ################
+#email validation
+gem 'validates_email_format_of'
 #Amazon Web Service gem
 gem 'aws-sdk', '~> 2.3'
 #Paperclip for photo attachments

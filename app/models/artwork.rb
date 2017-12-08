@@ -10,6 +10,4 @@ class Artwork < ApplicationRecord
         search_string = "%" + search_string.downcase + "%"
         self.where("lower(title) LIKE ?", search_string)
     end
-
-
 end
