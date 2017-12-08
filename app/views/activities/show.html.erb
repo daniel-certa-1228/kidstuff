@@ -11,7 +11,7 @@
         </div>
 
         <p><b>Title:</b> <%= @activity.title %></p>
-        <p><b>Child:</b> <%= @activity.child_id %></p>
+        <p><b>Child:</b> <%= @child %></p>
         <p><b>Date:</b> <%= @activity.date%></p>
         <p><b>Time:</b> <%= @activity.time%></p>
         <%= image_tag @activity.avatar.url(:original), class: "img-fluid" %><br>

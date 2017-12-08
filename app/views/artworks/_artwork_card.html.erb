@@ -3,7 +3,7 @@
         <div class="col-md">
             <div class="card">
                 <h4 class="card-title"> <%= artwork[:title]%> </h4>
-                <p class="card-text"><b>Child:</b> <%= artwork[:child_id] %> </p>
+                <p class="card-text"><b>Child:</b> <%= Child.where(id: artwork[:child_id])[0].child_name %> </p>
                 <p class="card-text"><b>Date:</b> <%= artwork[:date] %> </p>
                 <%= link_to (image_tag artwork.avatar.url(:sm)), artwork_path(artwork) %>
             </div>
