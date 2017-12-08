@@ -34,8 +34,13 @@ class ArtworksController < ApplicationController
 
     def show
         @artwork = Artwork.find(params[:id])
-        @child = Child.where(id: @artwork.child_id)
-        @child = @child[0].child_name
+
+        if @artwork.child_id.blank?
+            @child = "n/a"
+        else
+            @child = Child.where(id: @artwork.child_id)
+            @child = @child[0].child_name
+        end
     end
 
     def destroy
