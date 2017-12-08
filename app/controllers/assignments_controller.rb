@@ -8,11 +8,11 @@ class AssignmentsController < ApplicationController
     end
 
     def index
-        @assignment = Assignment.all
+        @assignments = Assignment.all
     end
 
     def create
-        @assignment = Assignment.new(activity_params)
+        @assignment = Assignment.new(assignment_params)
         to_text
         if @assignment.save
             redirect_to assignments_path
@@ -61,23 +61,23 @@ class AssignmentsController < ApplicationController
 
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "assignments/#{@assignment.id}.original.JPG")
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
-        @new_pdf.write("kidstuff_activity_#{@assignment.id}.pdf")
+        @new_pdf.write("kidstuff_assignment_#{@assignment.id}.pdf")
     end
 
     def mail_it
-        @email = params[:activity][:email]
-        @description = params[:activity][:title]
-        @content = params[:activity][:content]
-        @due_date = params[:activity][:due_date]
-        @attachment = "kidstuff_assignment_#{params[:activity][:attachment_id]}.pdf"
-        AssignmentMailer.assignment_mail(@email, @description, @content, @due_date, @attachment).deliver_later
+        @email = params[:assignment][:email]
+        @title = params[:assignment][:title]
+        @content = params[:assignment][:content]
+        @due_date = params[:assignment][:due_date]
+        @attachment = "kidstuff_assignment_#{params[:assignment][:attachment_id]}.pdf"
+        AssignmentMailer.assignment_mail(@email, @title, @content, @due_date, @attachment).deliver_later
         redirect_to assignments_path
         File.delete("#{@attachment}")
     end
 
     private
-    def activity_params
-        params.require(:activity).permit(:title, :due_date, :content, :avatar, :child_id, :user_id )
+    def assignment_params
+        params.require(:assignment).permit(:title, :due_date, :content, :avatar, :child_id, :user_id )
     end
 
     def to_text

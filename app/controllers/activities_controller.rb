@@ -67,12 +67,12 @@ class ActivitiesController < ApplicationController
 
     def mail_it
         @email = params[:activity][:email]
-        @description = params[:activity][:title]
+        @title = params[:activity][:title]
         @content = params[:activity][:content]
         @date = params[:activity][:date]
         @time = params[:activity][:time]
         @attachment = "kidstuff_activity_#{params[:activity][:attachment_id]}.pdf"
-        ActivityMailer.activity_mail(@email, @description, @content, @date, @time, @attachment).deliver_later
+        ActivityMailer.activity_mail(@email, @title, @content, @date, @time, @attachment).deliver_later
         redirect_to activities_path
         File.delete("#{@attachment}")
     end
