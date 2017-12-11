@@ -100,6 +100,7 @@ class AssignmentsController < ApplicationController
         @attachment = "kidstuff_assignment_#{params[:assignment][:attachment_id]}.pdf"
         AssignmentMailer.assignment_mail(@email, @title, @content, @due_date, @attachment).deliver_later
         redirect_to assignments_path
+        sleep 0.5
         File.delete("#{@attachment}")
     end
 
