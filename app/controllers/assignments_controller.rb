@@ -23,6 +23,7 @@ class AssignmentsController < ApplicationController
 
     def edit
         @assignment = Assignment.find(params[:id])
+        @children = Child.all
     end
 
     def update

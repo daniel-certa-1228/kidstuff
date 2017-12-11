@@ -21,6 +21,7 @@ class ArtworksController < ApplicationController
 
     def edit
         @artwork = Artwork.find(params[:id])
+        @children = Child.all
     end
 
     def update
