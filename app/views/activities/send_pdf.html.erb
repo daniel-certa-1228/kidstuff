@@ -11,9 +11,9 @@
       </div>
         
         <p><b>Title:</b> <%= @activity.title %></p>
-        <p><b>Child:</b> <%= @activity.child_id %></p>
-        <p><b>Date:</b> <%= @activity.date%></p>
-        <p><b>Time:</b> <%= @activity.time%></p>
+        <p><b>Child:</b> <%= @child %></p>
+        <p><b>Date:</b> <%= @parsed_date%></p>
+        <p><b>Time:</b> <%= @parsed_time%></p>
 
         <%= form_with scope: :activity, url: 'mail_it', local: true, html: { multipart: true } do |form| %>
       
