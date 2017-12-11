@@ -38,4 +38,5 @@ Rails.application.routes.draw do
   post '/activities/send_pdf/mail_it', to: 'activities#mail_it', as: 'mail_activity'
 
   get 'activities/to_icalendar/:id', to: 'activities#to_icalendar', as: 'ical_activity'
+  get 'assignments/to_icalendar/:id', to: 'assignments#to_icalendar', as: 'ical_assignment'
 end
