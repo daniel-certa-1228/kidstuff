@@ -42,6 +42,12 @@ class ArtworksController < ApplicationController
             @child = Child.where(id: @artwork.child_id)
             @child = @child[0].child_name
         end
+
+        if @artwork.date.blank?
+            @parsed_date = "n/a"
+        else
+            @parsed_date = @artwork.date.strftime( '%m/%d/%Y' )
+        end
     end
 
     def destroy
