@@ -37,6 +37,7 @@ class AssignmentsController < ApplicationController
 
     def show
         @assignment = Assignment.find(params[:id])
+
         if @assignment.child_id.blank?
             @child = "n/a"
         else
@@ -44,6 +45,11 @@ class AssignmentsController < ApplicationController
             @child = @child[0].child_name
         end
 
+        if @assignment.due_date.blank?
+            @parsed_date = "n/a"
+        else
+            @parsed_date = @assignment.due_date.strftime( '%m/%d/%Y' )
+        end
     end
 
     def destroy

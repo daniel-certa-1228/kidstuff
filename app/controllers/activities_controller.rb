@@ -45,6 +45,18 @@ class ActivitiesController < ApplicationController
             @child = Child.where(id: @activity.child_id)
             @child = @child[0].child_name
         end
+
+        if @activity.date.blank?
+            @parsed_date = "n/a"
+        else
+            @parsed_date = @activity.date.strftime( '%m/%d/%Y' )
+        end
+
+        if @activity.time.blank?
+            @parsed_time = "n/a"
+        else
+            @parsed_time = @activity.time.strftime( '%I:%M%p' )
+        end
     end
 
     def destroy
