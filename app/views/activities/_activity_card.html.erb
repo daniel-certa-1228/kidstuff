@@ -19,7 +19,7 @@
                 <% if (activity[:time].blank? ) %>
                     <p class="card-text"><b>Time: </b>n/a </p>
                 <% else %>
-                    <p class="card-text"><b>Time:</b> <%= activity[:time].strftime( '%I:%M%p' ) %> </p>
+                    <p class="card-text"><b>Time:</b> <%= activity[:time].strftime( '%l:%M%p' ) %> </p>
                 <%end%>
 
                 <%= link_to (image_tag activity.avatar.url(:sm)), activity_path(activity) %><br>
