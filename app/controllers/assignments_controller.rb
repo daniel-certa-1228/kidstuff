@@ -1,6 +1,7 @@
 require 'ocr_space'
 require 'rmagick'
-require "mini_magick"
+require 'mini_magick'
+require 'icalendar'
 
 class AssignmentsController < ApplicationController
     def new
@@ -100,6 +101,26 @@ class AssignmentsController < ApplicationController
         AssignmentMailer.assignment_mail(@email, @title, @content, @due_date, @attachment).deliver_later
         redirect_to assignments_path
         File.delete("#{@attachment}")
+    end
+
+    def to_icalendar
+        @assignment = Assignment.find(params[:id])
+        @start_time = DateTime.parse("#{@assignment.due_date.strftime( '%Y-%m-%d' )} 08:00:00")
+        puts @start_time
+        respond_to do |format|
+          format.html
+          format.ics do
+            cal = Icalendar::Calendar.new           
+                event = Icalendar::Event.new
+                event.dtstart = @start_time
+                event.dtend = @start_time + 1.hour
+                event.summary = @assignment.title
+    
+                cal.add_event(event)            
+                cal.publish
+                render plain: cal.to_ical
+          end
+        end
     end
 
     private

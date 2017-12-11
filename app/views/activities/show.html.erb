@@ -17,9 +17,9 @@
         <%= image_tag @activity.avatar.url(:original), class: "img-fluid" %><br>
 
         <div class="btn-group block" role="group" aria-label="...">
-            <%= link_to 'Edit Activity', edit_activity_path, :class => "btn btn-primary ass-button"  %>
+            <%= link_to 'Edit', edit_activity_path, :class => "btn btn-primary ass-button"  %>
 
-            <% if (@parsed_date == 'n/a' || @parsed_time == 'n/a')%>
+            <% if (@parsed_date == 'n/a' || @parsed_time == 'n/a' || @activity.title.blank?) %>
               <%= link_to 'Save to iCal', "#datetime-modal", :class => "btn btn-light ass-button", "data-toggle" => "modal" %>
             <% else %>
               <%= link_to 'Save to iCal', {:action => :to_icalendar, :format => :ics}, :class => "btn btn-success ass-button" %>
@@ -42,10 +42,17 @@
         </button>
       </div>
       <div class="modal-body">
+<<<<<<< HEAD
         <p>An event must have a date and time to save to iCal.</p>
       </div>
       <div class="modal-footer">
          <%= link_to 'Add Time and Date', edit_activity_path, :class => "btn btn-primary"  %>
+=======
+        <p>An Activity must have a Title, Date and Time to save to iCal.</p>
+      </div>
+      <div class="modal-footer">
+         <%= link_to 'Add Title, Date and Time', edit_activity_path, :class => "btn btn-primary"  %>
+>>>>>>> master
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
     </div>
