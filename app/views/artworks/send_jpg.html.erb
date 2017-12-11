@@ -11,8 +11,8 @@
       </div>
         
         <p><b>Title:</b> <%= @artwork.title %></p>
-        <p><b>Child:</b> <%= @artwork.child_id %></p>
-        <p><b>Date:</b> <%= @artwork.date%></p>
+        <p><b>Child:</b> <%= @child %></p>
+        <p><b>Date:</b> <%= @parsed_date%></p>
     
 
         <%= form_with scope: :artwork, url: 'mail_it', local: true, html: { multipart: true } do |form| %>
