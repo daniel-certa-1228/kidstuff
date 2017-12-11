@@ -12,8 +12,8 @@
 
         <p><b>Title:</b> <%= @activity.title %></p>
         <p><b>Child:</b> <%= @child %></p>
-        <p><b>Date:</b> <%= @activity.date%></p>
-        <p><b>Time:</b> <%= @activity.time%></p>
+        <p><b>Date:</b> <%= @parsed_date%></p>
+        <p><b>Time:</b> <%= @parsed_time%></p>
         <%= image_tag @activity.avatar.url(:original), class: "img-fluid" %><br>
 
         <div class="btn-group block" role="group" aria-label="...">

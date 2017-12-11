@@ -12,7 +12,7 @@
 
         <p><b>Title:</b> <%= @artwork.title %></p>
         <p><b>Child:</b> <%= @child %></p>
-        <p><b>Date:</b> <%= @artwork.date%></p>
+        <p><b>Date:</b> <%= @parsed_date%></p>
         <%= image_tag @artwork.avatar.url(:original), class: "img-fluid" %><br>
 
         <div class="btn-group block" role="group" aria-label="...">
