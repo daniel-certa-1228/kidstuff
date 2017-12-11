@@ -96,6 +96,7 @@ class ArtworksController < ApplicationController
         @attachment = "kidstuff_artwork_#{params[:artwork][:attachment_id]}.jpg"
         ArtMailer.artwork_mail(@email, @title, @date, @attachment).deliver_later
         redirect_to artworks_path
+        sleep 0.5
         File.delete("#{@attachment}")
     end
 

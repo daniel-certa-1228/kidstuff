@@ -16,7 +16,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-
+  
 //disables bootstrap buttons that are 'disabled' class
 // $( document ).on('turbolinks:load', function() {
 //     $('a[disabled=disabled]').click(function(event){
