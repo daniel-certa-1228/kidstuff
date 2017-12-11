@@ -58,10 +58,6 @@ class ActivitiesController < ApplicationController
         else
             @parsed_time = @activity.time.strftime( '%l:%M%p' )
         end
-
-        # if @activity.date.blank? || @activity.time.blank?
-        #     flash.now.notice = 'An activity must have a date and time ti save to iCal.  Use the "Edit" button to add them!'
-        # end
     end
 
     def destroy
