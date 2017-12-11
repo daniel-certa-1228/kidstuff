@@ -24,6 +24,7 @@ class ActivitiesController < ApplicationController
 
     def edit
         @activity = Activity.find(params[:id])
+        @children = Child.all
     end
 
     def update

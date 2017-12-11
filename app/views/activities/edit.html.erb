@@ -30,12 +30,7 @@
         <br>
 
         <div class="field">
-            <%= f.select(:child_id, include_blank: true) do %>
-                <%= content_tag(:option, "Select a Child", value: "") %>
-                <% Child.all.each do |c| -%>
-                <%= content_tag(:option, c.child_name, value: c.id) %>
-                <% end %>
-            <% end %>
+            <%= f.select(:child_id, content_tag(:option,'Select Child', :value=>"")+ options_from_collection_for_select(@children, 'id', 'child_name', @activity.child_id))  %>
         </div>
         <p>
             <%= f.label :date %><br>
