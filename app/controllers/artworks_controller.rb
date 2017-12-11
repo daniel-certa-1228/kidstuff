@@ -65,6 +65,19 @@ class ArtworksController < ApplicationController
     def send_jpg
         @artwork = Artwork.find(params[:id])
 
+        if @artwork.child_id.blank?
+            @child = "n/a"
+        else
+            @child = Child.where(id: @artwork.child_id)
+            @child = @child[0].child_name
+        end
+
+        if @artwork.date.blank?
+            @parsed_date = "n/a"
+        else
+            @parsed_date = @artwork.date.strftime( '%m/%d/%Y' )
+        end
+
         s3 = Aws::S3::Client.new(
             region: ENV.fetch('AWS_REGION'),
             access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),

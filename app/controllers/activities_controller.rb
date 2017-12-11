@@ -73,6 +73,25 @@ class ActivitiesController < ApplicationController
 
     def send_pdf
         @activity = Activity.find(params[:id])
+        
+        if @activity.child_id.blank?
+            @child = "n/a"
+        else
+            @child = Child.where(id: @activity.child_id)
+            @child = @child[0].child_name
+        end
+
+        if @activity.date.blank?
+            @parsed_date = "n/a"
+        else
+            @parsed_date = @activity.date.strftime( '%m/%d/%Y' )
+        end
+
+        if @activity.time.blank?
+            @parsed_time = "n/a"
+        else
+            @parsed_time = @activity.time.strftime( '%I:%M%p' )
+        end
 
         s3 = Aws::S3::Client.new(
             region: ENV.fetch('AWS_REGION'),

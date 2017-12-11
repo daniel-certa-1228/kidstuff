@@ -67,6 +67,19 @@ class AssignmentsController < ApplicationController
     def send_pdf
         @assignment = Assignment.find(params[:id])
 
+        if @assignment.child_id.blank?
+            @child = "n/a"
+        else
+            @child = Child.where(id: @assignment.child_id)
+            @child = @child[0].child_name
+        end
+
+        if @assignment.due_date.blank?
+            @parsed_date = "n/a"
+        else
+            @parsed_date = @assignment.due_date.strftime( '%m/%d/%Y' )
+        end
+
         s3 = Aws::S3::Client.new(
             region: ENV.fetch('AWS_REGION'),
             access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
