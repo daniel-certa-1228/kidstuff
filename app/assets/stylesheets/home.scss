@@ -9,13 +9,14 @@
     justify-content: space-around;
 }
 
-.home-btn {
-    height: 125px;
-}
-
 .button-container-2 {
     min-height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.home-btn {
+    font-size: 3em;
+    line-height: 125px;
 }

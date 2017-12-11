@@ -114,6 +114,7 @@ class ActivitiesController < ApplicationController
         @attachment = "kidstuff_activity_#{params[:activity][:attachment_id]}.pdf"
         ActivityMailer.activity_mail(@email, @title, @content, @date, @time, @attachment).deliver_later
         redirect_to activities_path
+        sleep 0.5
         File.delete("#{@attachment}")
     end
 
