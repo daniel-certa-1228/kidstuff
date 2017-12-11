@@ -1,6 +1,7 @@
 require 'ocr_space'
 require 'rmagick'
-require "mini_magick"
+require 'mini_magick'
+require 'icalendar'
 
 class ActivitiesController < ApplicationController
 
@@ -55,7 +56,7 @@ class ActivitiesController < ApplicationController
         if @activity.time.blank?
             @parsed_time = "n/a"
         else
-            @parsed_time = @activity.time.strftime( '%I:%M%p' )
+            @parsed_time = @activity.time.strftime( '%l:%M%p' )
         end
     end
 
@@ -114,6 +115,25 @@ class ActivitiesController < ApplicationController
         ActivityMailer.activity_mail(@email, @title, @content, @date, @time, @attachment).deliver_later
         redirect_to activities_path
         File.delete("#{@attachment}")
+    end
+
+    def to_icalendar
+        @activity = Activity.find(params[:id])
+        @start_time = DateTime.parse("#{@activity.date.strftime( '%Y-%m-%d' )} #{@activity.time.strftime( '%H:%M:%S' )}")
+        respond_to do |format|
+          format.html
+          format.ics do
+            cal = Icalendar::Calendar.new           
+                event = Icalendar::Event.new
+                event.dtstart = @start_time
+                event.dtend = @start_time + 1.hour
+                event.summary = @activity.title
+    
+                cal.add_event(event)            
+                cal.publish
+                render plain: cal.to_ical
+          end
+        end
     end
 
     private

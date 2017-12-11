@@ -18,8 +18,36 @@
 
         <div class="btn-group block" role="group" aria-label="...">
             <%= link_to 'Edit Activity', edit_activity_path, :class => "btn btn-primary ass-button"  %>
-            <%= link_to 'Email PDF', send_activity_path(@activity), :class => "btn btn-outline-primary ass-button"  %>
+
+            <% if (@parsed_date == 'n/a' || @parsed_time == 'n/a')%>
+              <%= link_to 'Save to iCal', "#datetime-modal", :class => "btn btn-light ass-button", "data-toggle" => "modal" %>
+            <% else %>
+              <%= link_to 'Save to iCal', {:action => :to_icalendar, :format => :ics}, :class => "btn btn-success ass-button" %>
+            <% end %>
+
+            <%= link_to 'Email PDF', send_activity_path(@activity), :class => "btn btn-warning ass-button"  %>
         </div>
+        <%= flash[:notice] %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="datetime-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Save to iCal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>An event must have a date and time to save to iCal.</p>
+      </div>
+      <div class="modal-footer">
+         <%= link_to 'Add Time and Date', edit_activity_path, :class => "btn btn-primary"  %>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
     </div>
   </div>
 </div>
