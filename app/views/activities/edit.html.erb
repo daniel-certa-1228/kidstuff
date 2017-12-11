@@ -30,8 +30,7 @@
         <br>
 
         <div class="field">
-            <%= f.select(:child_id, options_from_collection_for_select(@children, 'id', 'child_name'))  %>
-
+            <%= f.select(:child_id, content_tag(:option,'Select Child', :value=>"")+ options_from_collection_for_select(@children, 'id', 'child_name', @activity.child_id))  %>
         </div>
         <p>
             <%= f.label :date %><br>
