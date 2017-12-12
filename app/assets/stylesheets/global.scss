@@ -36,7 +36,7 @@ body {
 }
 
 .main-h2 {
-    margin-bottom: 0;
+    margin-bottom: .25em;
     font-family: 'Walter Turncoat', cursive;
     letter-spacing: 2px;
 }
@@ -47,4 +47,9 @@ header {
 
 .not-yet-message {
     margin: .75em 0 1em;
+}
+
+.progress.active .progress-bar {
+    -webkit-transition: none !important;
+    transition: none !important;
 }
