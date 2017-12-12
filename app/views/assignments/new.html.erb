@@ -41,7 +41,7 @@
                 <%= form.hidden_field :content %>
             </p>
             <p>
-            <%=  form.submit "Save", {href:"#", class: "btn btn-success btn-block clickable", id:"new-assignment-btn",  "data-toggle" => "modal", "data-target" => "#new-assignment-progress"} %>
+            <%=  form.submit "Save", href:"#new-assignment-progress", class: "btn btn-success btn-block clickable", id:"new-assignment-btn",  "data-toggle" => "modal" %>
             </p>
         <% end %>
 
@@ -49,7 +49,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="new-assignment-progress" tabindex="-1" role="dialog" aria-labelledby="new-assignment-progressLabel" aria-hidden="true">
+<div class="modal" id="new-assignment-progress" tabindex="-1" role="dialog" aria-labelledby="new-assignment-progressLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
