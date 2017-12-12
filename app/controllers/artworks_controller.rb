@@ -92,9 +92,10 @@ class ArtworksController < ApplicationController
     def mail_it
         @email = params[:artwork][:email]
         @title = params[:artwork][:title]
-        @date = params[:artwork][:due_date]
+        @child = params[:artwork][:child]
+        @date = params[:artwork][:date]
         @attachment = "kidstuff_artwork_#{params[:artwork][:attachment_id]}.jpg"
-        ArtMailer.artwork_mail(@email, @title, @date, @attachment).deliver_later
+        ArtMailer.artwork_mail(@email, @title, @child, @date, @attachment).deliver_later
         redirect_to artworks_path
         sleep 0.5
         File.delete("#{@attachment}")

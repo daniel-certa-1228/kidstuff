@@ -91,7 +91,7 @@ class ActivitiesController < ApplicationController
         if @activity.time.blank?
             @parsed_time = "n/a"
         else
-            @parsed_time = @activity.time.strftime( '%I:%M%p' )
+            @parsed_time = @activity.time.strftime( '%l:%M%p' )
         end
 
         s3 = Aws::S3::Client.new(
@@ -108,11 +108,12 @@ class ActivitiesController < ApplicationController
     def mail_it
         @email = params[:activity][:email]
         @title = params[:activity][:title]
+        @child = params[:activity][:child]
         @content = params[:activity][:content]
         @date = params[:activity][:date]
         @time = params[:activity][:time]
         @attachment = "kidstuff_activity_#{params[:activity][:attachment_id]}.pdf"
-        ActivityMailer.activity_mail(@email, @title, @content, @date, @time, @attachment).deliver_later
+        ActivityMailer.activity_mail(@email, @title,  @child, @date, @time, @content, @attachment).deliver_later
         redirect_to activities_path
         sleep 0.5
         File.delete("#{@attachment}")
