@@ -29,7 +29,7 @@ Rails.application.configure do
   port:                 587,
   domain:               'dancerta.tech',
   user_name:            'kidstuffapp@gmail.com',
-  password:             'kidstuff6969',
+  password:             ENV.fetch('KIDSTUFF_MAIL_PASSWORD'),
   authentication:       'plain',
   enable_starttls_auto: true  }
   # Code is not reloaded between requests.
