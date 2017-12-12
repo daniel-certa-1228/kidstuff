@@ -95,10 +95,11 @@ class AssignmentsController < ApplicationController
     def mail_it
         @email = params[:assignment][:email]
         @title = params[:assignment][:title]
+        @child = params[:assignment][:child]
         @content = params[:assignment][:content]
         @due_date = params[:assignment][:due_date]
         @attachment = "kidstuff_assignment_#{params[:assignment][:attachment_id]}.pdf"
-        AssignmentMailer.assignment_mail(@email, @title, @content, @due_date, @attachment).deliver_later
+        AssignmentMailer.assignment_mail(@email, @title, @child, @due_date, @content, @attachment).deliver_later
         redirect_to assignments_path
         sleep 0.5
         File.delete("#{@attachment}")

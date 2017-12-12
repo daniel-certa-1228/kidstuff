@@ -25,7 +25,8 @@
             </p>
 
             <%= form.hidden_field :title, :value => @artwork.title %>
-            <%= form.hidden_field :date, :value => @artwork.date %>
+            <%= form.hidden_field :child, :value => @child %>            
+            <%= form.hidden_field :date, :value => @parsed_date %>
             <%= form.hidden_field :attachment_id, :value => @artwork.id %>
             
             <%=  form.submit "Send", class: "btn btn-success btn-block" %>

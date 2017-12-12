@@ -1,6 +1,7 @@
 <h1>You've recieved an Assignment from Kid Stuff!</h1>
   <h2><%= @title %></h2>
-  <%= @child %>
-  <%= @due_date %>
-  <%= @content %>
-  <p>If you believe you've received this message in error, you are probably correct.</p>
+  <p><b>Child:</b> <%= @child %></p>
+  <p><b>Due Date:</b> <%= @due_date %></p>
+  <p><b>Content:</b></p>
+  <p style="background-color: #e8e8e8; padding: 1em; border-radius: 10px;"> <%= @content %> </p>
+  <p style="font-size: .75em;"><b>If you believe you've received this message in error, you are probably correct.</b></p>
