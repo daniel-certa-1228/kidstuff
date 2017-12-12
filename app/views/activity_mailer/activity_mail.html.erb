@@ -1,7 +1,8 @@
 <h1>You've recieved an Activity from Kid Stuff!</h1>
   <h2><%= @title %></h2>
-  <%= @child %>
-  <%= @date %>
-  <%= @time %>
-  <%= @content %>
-  <p>If you believe you've received this message in error, you are probably correct.</p>
+  <p><b>Child:</b> <%= @child %></p>
+  <p><b>Date:</b> <%= @date %></p>
+  <p><b>Time:</b> <%= @time %></p>
+  <p><b>Content:</b></p>
+  <p style="background-color: #e8e8e8; padding: 1em; border-radius: 10px;"> <%= @content %> </p>
+  <p>If you believe you've received this message in error, you're probably correct.</p>

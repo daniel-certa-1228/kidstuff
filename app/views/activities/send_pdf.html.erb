@@ -12,8 +12,8 @@
         
         <p><b>Title:</b> <%= @activity.title %></p>
         <p><b>Child:</b> <%= @child %></p>
-        <p><b>Date:</b> <%= @parsed_date%></p>
-        <p><b>Time:</b> <%= @parsed_time%></p>
+        <p><b>Date:</b> <%= @parsed_date %></p>
+        <p><b>Time:</b> <%= @parsed_time %></p>
 
         <%= form_with scope: :activity, url: 'mail_it', local: true, html: { multipart: true } do |form| %>
       
@@ -25,9 +25,10 @@
             </p>
 
             <%= form.hidden_field :title, :value => @activity.title %>
+            <%= form.hidden_field :child, :value => @child %>
             <%= form.hidden_field :content, :value => @activity.content %>
-            <%= form.hidden_field :date, :value => @activity.date %>
-            <%= form.hidden_field :time, :value => @activity.time %>
+            <%= form.hidden_field :date, :value => @parsed_date %>
+            <%= form.hidden_field :time, :value => @parsed_time %>
             <%= form.hidden_field :attachment_id, :value => @activity.id %>
             
             <%=  form.submit "Send", class: "btn btn-success btn-block" %>
