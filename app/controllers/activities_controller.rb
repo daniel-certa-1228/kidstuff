@@ -15,9 +15,13 @@ class ActivitiesController < ApplicationController
 
     def create
         @activity = Activity.new(activity_params)
-        to_text
-        if @activity.save
-            redirect_to activities_path
+        if is_photo?(params[:activity][:avatar].path)
+            to_text
+            if @activity.save
+                redirect_to activities_path
+            else
+                render 'new'
+            end
         else
             render 'new'
         end
@@ -148,5 +152,13 @@ class ActivitiesController < ApplicationController
         image = image.resize "1200x1800"
         resource = OcrSpace::Resource.new(apikey: ENV.fetch('OCR_API_KEY'))
         @activity.content = resource.clean_convert file: image.path
+    end
+
+    def is_photo?(file)
+        if file.to_s.downcase.include?(".gif") or file.to_s.downcase.include?(".png") or file.to_s.downcase.include?(".jpg") or file.to_s.downcase.include?(".jpeg")
+            return true
+        else
+            return false
+        end
     end
 end

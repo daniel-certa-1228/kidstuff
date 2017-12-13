@@ -12,6 +12,18 @@
         </div>
 
         <%= form_with scope: :assignment, url: assignments_path, local: true, html: { multipart: true } do |form| %>
+
+             <% if @assignment.errors.any? %>
+              <div class="error_messages">
+                <h3>Form is invalid</h3>
+                <ul>
+                  <% @assignment.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
             <%= form.hidden_field :user_id, :value => session[:user_id] %>
             <p>
             <%= form.label :title %><br>

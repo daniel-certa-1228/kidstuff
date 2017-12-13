@@ -14,11 +14,15 @@ class AssignmentsController < ApplicationController
 
     def create
         @assignment = Assignment.new(assignment_params)
-        to_text
-        if @assignment.save
-            redirect_to assignments_path
+        if is_photo?(params[:assignment][:avatar].path)
+            to_text
+            if @assignment.save
+                redirect_to assignments_path
+            else
+                render 'new'
+            end
         else
-            render 'new'
+            render 'new'            
         end
     end
 
@@ -135,5 +139,13 @@ class AssignmentsController < ApplicationController
         image = image.resize "1200x1800"
         resource = OcrSpace::Resource.new(apikey: ENV.fetch('OCR_API_KEY'))
         @assignment.content = resource.clean_convert file: image.path
+    end
+
+    def is_photo?(file)
+        if file.to_s.downcase.include?(".gif") or file.to_s.downcase.include?(".png") or file.to_s.downcase.include?(".jpg") or file.to_s.downcase.include?(".jpeg")
+            return true
+        else
+            return false
+        end
     end
 end
