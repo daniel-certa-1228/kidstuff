@@ -117,10 +117,16 @@ class ActivitiesController < ApplicationController
         @date = params[:activity][:date]
         @time = params[:activity][:time]
         @attachment = "kidstuff_activity_#{params[:activity][:attachment_id]}.pdf"
-        ActivityMailer.activity_mail(@email, @title,  @child, @date, @time, @content, @attachment).deliver_later
-        redirect_to activities_path
-        sleep 0.5
-        File.delete("#{@attachment}")
+        @activity_id = params[:activity][:attachment_id]
+
+        if is_valid?(@email)
+            ActivityMailer.activity_mail(@email, @title,  @child, @date, @time, @content, @attachment).deliver_later
+            redirect_to activities_path
+            sleep 0.5
+            File.delete("#{@attachment}")
+        else
+            redirect_to send_activity_path(@activity_id), notice: 'You must enter a valid email address.'
+        end
     end
 
     def to_icalendar
@@ -160,5 +166,10 @@ class ActivitiesController < ApplicationController
         else
             return false
         end
+    end
+
+    def is_valid?(email)
+        regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+        regex.match?(email)
     end
 end

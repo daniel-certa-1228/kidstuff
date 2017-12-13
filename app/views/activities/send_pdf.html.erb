@@ -19,6 +19,10 @@
       
             <%= image_tag @activity.avatar.url(:sm) %><br>
 
+            <header>         
+              <h5 class="flash-h5 red"><%= flash[:notice] %></h5>
+            </header>
+
             <p>
             <%= form.label :email %><br>
             <%= form.text_field :email, class: "form-control"  %>
