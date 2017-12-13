@@ -103,10 +103,16 @@ class AssignmentsController < ApplicationController
         @content = params[:assignment][:content]
         @due_date = params[:assignment][:due_date]
         @attachment = "kidstuff_assignment_#{params[:assignment][:attachment_id]}.pdf"
-        AssignmentMailer.assignment_mail(@email, @title, @child, @due_date, @content, @attachment).deliver_later
-        redirect_to assignments_path
-        sleep 0.5
-        File.delete("#{@attachment}")
+        @assignment_id = params[:assignment][:attachment_id]
+
+        if is_valid?(@email)
+            AssignmentMailer.assignment_mail(@email, @title, @child, @due_date, @content, @attachment).deliver_later
+            redirect_to assignments_path
+            sleep 0.5
+            File.delete("#{@attachment}")
+        else
+            redirect_to send_assignment_path(@assignment_id), notice: 'You must enter a valid email address.'
+        end
     end
 
     def to_icalendar
@@ -147,5 +153,10 @@ class AssignmentsController < ApplicationController
         else
             return false
         end
+    end
+
+    def is_valid?(email)
+        regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+        regex.match?(email)
     end
 end

@@ -95,14 +95,26 @@ class ArtworksController < ApplicationController
         @child = params[:artwork][:child]
         @date = params[:artwork][:date]
         @attachment = "kidstuff_artwork_#{params[:artwork][:attachment_id]}.jpg"
-        ArtMailer.artwork_mail(@email, @title, @child, @date, @attachment).deliver_later
-        redirect_to artworks_path
-        sleep 0.5
-        File.delete("#{@attachment}")
+        @artwork_id = params[:artwork][:attachment_id]
+        
+        if is_valid?(@email)
+            ArtMailer.artwork_mail(@email, @title, @child, @date, @attachment).deliver_later
+            redirect_to artworks_path
+            sleep 0.5
+            File.delete("#{@attachment}")
+        else
+            redirect_to send_art_path(@artwork_id), notice: 'You must enter a valid email address.'
+        end
     end
 
     private
-    def artwork_params
-        params.require(:artwork).permit(:title, :date, :avatar, :child_id, :user_id )
-    end
+
+        def artwork_params
+            params.require(:artwork).permit(:title, :date, :avatar, :child_id, :user_id )
+        end
+
+        def is_valid?(email)
+            regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+            regex.match?(email)
+        end
 end
