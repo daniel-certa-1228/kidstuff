@@ -1,8 +1,13 @@
 <% @assignments.where({user_id: session[:user_id]}).each do |assignment|%>
     
-        <div class="col-md">
+        <div class="col-xs-6">
             <div class="card">
-                <h4 class="card-title"> <%= assignment[:title]%> </h4>
+
+                <% if assignment[:title].blank?%>
+                    <h5 class="card-title">No Title</h5>
+                <% else %>
+                    <h5 class="card-title"> <%= assignment[:title]%> </h5>                
+                <% end %>
 
                 <% if (assignment[:child_id].blank? ) %>
                    <p class="card-text"><b>Child: </b>n/a</p>
@@ -11,12 +16,12 @@
                 <%end%>
 
                 <% if (assignment[:due_date].blank? ) %>
-                    <p class="card-text"><b>Due Date: </b>n/a</p>
+                    <p class="card-text"><b>Due Date: </b><br>n/a</p>
                 <% else %>
-                    <p class="card-text"><b>Due Date:</b> <%= assignment[:due_date].strftime( '%m/%d/%Y' ) %> </p>
+                    <p class="card-text"><b>Due Date:</b><br> <%= assignment[:due_date].strftime( '%m/%d/%Y' ) %> </p>
                 <%end%>
 
-                <%= link_to (image_tag assignment.avatar.url(:sm)), assignment_path(assignment) %>
+                <%= link_to (image_tag assignment.avatar.url(:sm), class: "img-fluid"), assignment_path(assignment) %>
             </div>
             
         </div>

@@ -1,9 +1,13 @@
 <% @activities.where({user_id: session[:user_id]}).each do |activity|%>
     
-        <div class="col-md">
+        <div class="col-xs-6">
             <div class="card">
-                <h4 class="card-title"> <%= activity[:title]%> </h4>
-                
+                <% if activity[:title].blank?%>
+                    <h5 class="card-title">No Title</h5>
+                <% else %>
+                    <h5 class="card-title"><%= activity[:title]%></h5>                
+                <% end %>
+
                 <% if (activity[:child_id].blank? ) %>
                    <p class="card-text"><b>Child: </b>n/a</p>
                 <% else %>
@@ -22,7 +26,7 @@
                     <p class="card-text"><b>Time:</b> <%= activity[:time].strftime( '%l:%M%p' ) %> </p>
                 <%end%>
 
-                <%= link_to (image_tag activity.avatar.url(:sm)), activity_path(activity) %><br>
+                <%= link_to (image_tag activity.avatar.url(:sm), class: "img-fluid"), activity_path(activity) %><br>
             </div>
             
         </div>
