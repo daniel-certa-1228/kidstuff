@@ -1,8 +1,12 @@
 <% @artworks.where({user_id: session[:user_id]}).each do |artwork|%>
     
-        <div class="col-md">
+        <div class="col-xs-6">
             <div class="card">
-                <h4 class="card-title"> <%= artwork[:title]%> </h4>
+                <% if artwork[:title].blank?%>
+                    <h5 class="card-title">No Title</h5>                
+                <% else %>
+                    <h5 class="card-title"><%= artwork[:title]%></h5>
+                <% end %>
 
                 <% if (artwork[:child_id].blank? ) %>
                    <p class="card-text"><b>Child: </b>n/a</p>
@@ -16,7 +20,7 @@
                     <p class="card-text"><b>Date:</b> <%= artwork[:date].strftime( '%m/%d/%Y' ) %> </p>
                 <%end%>
 
-                <%= link_to (image_tag artwork.avatar.url(:sm)), artwork_path(artwork) %>
+                <%= link_to (image_tag artwork.avatar.url(:sm), class: "img-fluid"), artwork_path(artwork) %>
             </div>
             
         </div>
