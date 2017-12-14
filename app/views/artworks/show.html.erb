@@ -10,7 +10,7 @@
             <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
         </div>
 
-        <p><b>Title:</b> <%= @artwork.title %></p>
+        <p><b>Title:</b> <%= @title %></p>
         <p><b>Child:</b> <%= @child %></p>
         <p><b>Date:</b> <%= @parsed_date%></p>
         <%= image_tag @artwork.avatar.url(:original), class: "img-fluid" %><br>

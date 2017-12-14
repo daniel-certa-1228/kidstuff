@@ -5,10 +5,11 @@
         <h2 class="main-h2">User Profile</h2>
     </header>
         
-        <p>User Name: <%= @user.user_name %></p>
-        <p>Email: <%= @user.email %></p>
+        <p><b>User Name:</b> <%= @user.user_name %></p>
+        <p><b>Email:</b> <%= @user.email %></p>
         <div>
             <%= link_to 'Edit User Name', edit_user_path, class: "btn btn-primary btn-block" %>
+            <%= link_to 'Home', root_path, class: "btn btn-secondary btn-block" %>
         </div>
     </div>
   </div>

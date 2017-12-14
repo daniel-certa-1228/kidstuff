@@ -1,3 +1,19 @@
 // Place all the styles related to the Children controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.child-card {
+    padding: 1rem;
+
+    .btn {
+        margin-top: 1rem;
+    }
+
+    h4 {
+        text-decoration: underline;
+    }
+
+    p {
+        margin-bottom: .5rem;
+    }
+}

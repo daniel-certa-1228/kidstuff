@@ -23,10 +23,14 @@
           <%= f.text_field :user_name, class: "form-control" %>
         </div>
         <br>
-        <p>Email: <%= @user.email %></p>
+        <p><b>Email:</b> <%= @user.email %></p>
 
         <p>
-          <div class="actions"><%= f.submit "Save", class: "btn btn-success btn-block" %></div>
+          <div class="actions">
+          <%= f.submit "Save", class: "btn btn-success btn-block" %>
+          <%= link_to 'Back', user_path(@user), class: "btn btn-secondary btn-block" %>
+          </div>
+          
         </p>
       <% end %>
     </div>
