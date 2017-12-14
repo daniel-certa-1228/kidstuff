@@ -36,6 +36,12 @@ class ArtworksController < ApplicationController
     def show
         @artwork = Artwork.find(params[:id])
 
+        if @artwork.title.blank?
+            @title = "n/a"
+        else
+            @title = @artwork.title
+        end
+
         if @artwork.child_id.blank?
             @child = "n/a"
         else
@@ -64,6 +70,12 @@ class ArtworksController < ApplicationController
 
     def send_jpg
         @artwork = Artwork.find(params[:id])
+
+        if @artwork.title.blank?
+            @title = "n/a"
+        else
+            @title = @artwork.title
+        end
 
         if @artwork.child_id.blank?
             @child = "n/a"

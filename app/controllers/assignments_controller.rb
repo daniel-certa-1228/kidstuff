@@ -43,6 +43,12 @@ class AssignmentsController < ApplicationController
     def show
         @assignment = Assignment.find(params[:id])
 
+        if @assignment.title.blank?
+            @title = "n/a"
+        else
+            @title = @assignment.title
+        end
+
         if @assignment.child_id.blank?
             @child = "n/a"
         else
@@ -71,6 +77,12 @@ class AssignmentsController < ApplicationController
 
     def send_pdf
         @assignment = Assignment.find(params[:id])
+
+        if @assignment.title.blank?
+            @title = "n/a"
+        else
+            @title = @assignment.title
+        end
 
         if @assignment.child_id.blank?
             @child = "n/a"

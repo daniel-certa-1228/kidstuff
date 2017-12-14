@@ -10,13 +10,11 @@
     </div>
         <% @children.where({user_id: session[:user_id]}).each do |child|%>
             <div class="row">
-                <div class="card-block col-md">
+                <div class="card-block col-md child-card">
                     <div class="card-block">
-                        <h4 class="card-title"> <%= child[:child_name]%> </h4>
-                        <h6>Birthday: </h6>
-                        <p class="card-text"> <%= child[:birthday] %> </p>
-                        <h6>Grade: </h6>
-                        <p class="card-text"> <%= child[:grade_level] %> </p>
+                        <h4 class="card-title kid-font"> <%= child[:child_name]%> </h4>
+                        <p class="card-text"><b>Birthday:</b> <%= child[:birthday].strftime( '%m/%d/%Y' ) %> </p>
+                        <p class="card-text"><b>Grade:</b> <%= child[:grade_level] %> </p>
                     </div>
                     <%= link_to 'Edit Child', edit_child_path(child.id), {:class => "btn btn-primary btn-block"}  %>
                     <hr>

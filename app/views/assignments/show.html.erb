@@ -10,7 +10,7 @@
             <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
         </div>
 
-        <p><b>Title:</b> <%= @assignment.title %></p>
+        <p><b>Title:</b> <%= @title %></p>
         <p><b>Child:</b> <%= @child %></p>
         <p><b>Due Date:</b> <%= @parsed_date%></p>
         <%= image_tag @assignment.avatar.url(:original), class: "img-fluid" %><br>
@@ -18,7 +18,7 @@
         <div class="btn-group block" role="group" aria-label="...">
             <%= link_to 'Edit', edit_assignment_path, :class => "btn btn-primary ass-button"  %>
 
-            <% if (@parsed_date == 'n/a' || @assignment.title.blank?) %>
+            <% if (@parsed_date == 'n/a' || @title == 'n/a') %>
               <%= link_to 'Save to iCal', "#datetime-modal", :class => "btn btn-light ass-button", "data-toggle" => "modal" %>
             <% else %>
               <%= link_to 'Save to iCal', {:action => :to_icalendar, :format => :ics}, :class => "btn btn-success ass-button" %>

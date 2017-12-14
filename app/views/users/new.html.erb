@@ -34,7 +34,10 @@
           <%= f.text_field :user_name, class: "form-control" %>
         </div>
         <p>
-          <div class="actions"><%= f.submit "Sign Up", class: "btn btn-success btn-block" %></div>
+          <div class="actions">
+          <%= f.submit "Sign Up", class: "btn btn-success btn-block" %>
+          <%= link_to 'Back', root_path, class: "btn btn-secondary btn-block" %>
+          </div>
         </p>
       <% end %>
     </div>

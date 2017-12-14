@@ -16,7 +16,10 @@
                 <%= password_field_tag :password, nil, class:'form-control'  %>
             </div>
             <p>
-                <div class="actions"><%= submit_tag "Log In", class: "btn btn-success btn-block" %></div>
+                <div class="actions">
+                <%= submit_tag "Log In", class: "btn btn-success btn-block" %>
+                <%= link_to 'Back', root_path, class: "btn btn-secondary btn-block" %>
+                </div>
             </p>
             <% end %>
         </div>

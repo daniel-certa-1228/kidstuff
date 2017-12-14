@@ -44,6 +44,12 @@ class ActivitiesController < ApplicationController
     def show
         @activity = Activity.find(params[:id])
 
+        if @activity.title.blank?
+            @title = "n/a"
+        else
+            @title = @activity.title
+        end
+
         if @activity.child_id.blank?
             @child = "n/a"
         else
@@ -78,6 +84,12 @@ class ActivitiesController < ApplicationController
 
     def send_pdf
         @activity = Activity.find(params[:id])
+        
+        if @activity.title.blank?
+            @title = "n/a"
+        else
+            @title = @activity.title
+        end
         
         if @activity.child_id.blank?
             @child = "n/a"
