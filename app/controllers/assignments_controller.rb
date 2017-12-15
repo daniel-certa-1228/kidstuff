@@ -9,7 +9,7 @@ class AssignmentsController < ApplicationController
     end
 
     def index
-        @assignments = Assignment.all
+        @assignments = Assignment.all.order('created_at DESC')
     end
 
     def create
