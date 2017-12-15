@@ -10,6 +10,8 @@
           <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
       </div>
       <%= flash[:notice] %>
+      
+      <br><%= image_tag @activity.avatar.url(:original), class: "img-fluid" %><br><br>
 
       <%= form_for @activity do |f| %>
         <% if @activity.errors.any? %>
@@ -32,13 +34,14 @@
         <div class="field">
             <%= f.select(:child_id, content_tag(:option,'Select Child', :value=>"")+ options_from_collection_for_select(@children, 'id', 'child_name', @activity.child_id))  %>
         </div>
+        <br>
         <p>
-            <%= f.label :date %><br>
+            <b><%= f.label :date %>:</b><br>
             <%= f.date_field :date, class: "form-control"  %>
         </p>
 
         <p>
-            <%= f.label :time %><br>
+            <b><%= f.label :time %>:</b><br>
             <%= f.time_field :time, class: "form-control"  %>
         </p>
 
