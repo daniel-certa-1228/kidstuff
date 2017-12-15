@@ -11,6 +11,8 @@
       </div>
       <%= flash[:notice] %>
 
+      <br><%= image_tag @assignment.avatar.url(:original), class: "img-fluid" %><br><br>
+
       <%= form_for @assignment do |f| %>
         <% if @assignment.errors.any? %>
           <div class="error_messages">
@@ -32,8 +34,9 @@
         <div class="field">
             <%= f.select(:child_id, content_tag(:option,'Select Child', :value=>"")+ options_from_collection_for_select(@children, 'id', 'child_name', @assignment.child_id))  %>
         </div>
+        <br>
         <p>
-            <%= f.label :due_date %><br>
+            <b><%= f.label :due_date %>:</b><br>
             <%= f.date_field :due_date, class: "form-control"  %>
         </p>
 

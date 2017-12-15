@@ -7,7 +7,7 @@ class ArtworksController < ApplicationController
     end
 
     def index
-        @artworks = Artwork.all
+        @artworks = Artwork.all.order('created_at DESC')
     end
 
     def create
