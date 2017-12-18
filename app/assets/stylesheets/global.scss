@@ -280,3 +280,32 @@ header {
   .navbar-dark .navbar-nav .nav-link.disabled {
     color: rgba(255, 255, 255, 0.25);
   }
+
+  .btn-primary {
+    color: #fff;
+    background-color: $blue;
+    border-color: $blue;
+  }
+  
+  .btn-primary:hover {
+    color: #fff;
+    background-color: $blue;
+    border-color: $blue;
+  }
+  
+  .btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+  
+  .btn-primary.disabled, .btn-primary:disabled {
+    background-color: $blue;
+    border-color: $blue;
+  }
+  
+  .btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active,
+  .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: $blue;
+    border-color: $blue;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
