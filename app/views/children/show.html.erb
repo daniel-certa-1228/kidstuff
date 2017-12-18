@@ -10,11 +10,15 @@
             <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
         </div>
         <p><b>Child Name:</b> <%= @child.child_name %></p>
-        <p><b>Birthday:</b> <%= @child.birthday %></p>
+        <% if @child.birthday.blank? %>
+            <p class="card-text"><b>Birthday:</b> n/a </p>
+        <% else %>
+            <p class="card-text"><b>Birthday:</b> <%= @child.birthday.strftime( '%m/%d/%Y' ) %> </p>
+        <% end %>
         <p><b>Grade:</b> <%= @child.grade_level%></p>
         <div>
         <hr>
-            <%= link_to 'Edit Child Info', edit_child_path, class: "btn btn-primary btn-block" %>
+            <%= link_to 'Edit Child Info', edit_child_path, class: "btn btn-secondary btn-block" %>
         </div>
     </div>
   </div>

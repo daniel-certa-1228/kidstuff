@@ -16,8 +16,8 @@
         <%= image_tag @artwork.avatar.url(:original), class: "img-fluid" %><br>
 
         <div class="btn-group block" role="group" aria-label="...">
-            <%= link_to 'Edit', edit_artwork_path, :class => "btn btn-primary ass-button"  %>
-            <%= link_to 'Email JPG', send_art_path(@artwork), :class => "btn btn-warning ass-button"  %>
+            <%= link_to 'Edit', edit_artwork_path, :class => "btn btn-secondary ass-button"  %>
+            <%= link_to 'Email JPG', send_art_path(@artwork), :class => "btn btn-outline-secondary ass-button"  %>
         </div>
     </div>
   </div>
