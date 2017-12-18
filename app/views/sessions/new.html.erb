@@ -1,10 +1,12 @@
 <div class="container center">
   <div class="row justify-content-center">
     <div class="col-md-8">
-        <%= flash[:notice] %>
+        
         <header>
             <h2 class="main-h2">Log In</h2>
         </header>
+
+            <p class="red"><%= flash[:notice] %></p>
 
             <%= form_tag sessions_path do %>
             <div class="field">
