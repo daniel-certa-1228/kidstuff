@@ -9,9 +9,9 @@
             <%= flash[:notice] %>
         </header>
         <div class="button-container">
-            <%= link_to artworks_path, {:class => "btn btn-dark btn-block home-btn kid-font"}  do %><i class="fas fa-paint-brush"></i>Art<%end%>
-            <%= link_to assignments_path, {:class => "btn btn-dark btn-block home-btn kid-font"}  do %><i class="fas fa-book"></i> Homework<%end%>
-            <%= link_to activities_path, {:class => "btn btn-dark btn-block home-btn kid-font"} do %><i class="fas fa-trophy"></i> Activities <% end %>
+            <%= link_to artworks_path, {:class => "btn btn-dark btn-block home-btn kid-font"}  do %><i class="fa fa-paint-brush" aria-hidden="true"></i> Artwork<%end%>
+            <%= link_to assignments_path, {:class => "btn btn-dark btn-block home-btn kid-font"}  do %><i class="fa fa-book" aria-hidden="true"></i> Homework<%end%>
+            <%= link_to activities_path, {:class => "btn btn-dark btn-block home-btn kid-font"} do %><i class="fa fa-trophy" aria-hidden="true"></i> Activities <% end %>
         </div>
 
     </div>
@@ -26,11 +26,11 @@
             <%= flash[:notice] %>
         </header>
         <div class="button-container-2">
-            <%= link_to login_path, {:class => "btn btn-dark btn-block home-btn kid-font"}  do %><i class="fas fa-sign-in-alt"></i> Login<% end %>
+            <%= link_to login_path, {:class => "btn btn-dark btn-block home-btn kid-font"}  do %><i class="fa fa-sign-in" aria-hidden="true"></i> Login<% end %>
             <header>
                 <h2 class="main-h2">-OR-</h2>
             </header>
-            <%= link_to signup_path, {:class => "btn btn-dark btn-block home-btn kid-font"} do %><i class="fas fa-user-plus"></i> Sign Up<% end %>
+            <%= link_to signup_path, {:class => "btn btn-dark btn-block home-btn kid-font"} do %><i class="fa fa-user-plus" aria-hidden="true"></i></i> Sign Up<% end %>
         </div>
     </div>
 
