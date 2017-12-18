@@ -26,9 +26,9 @@
         <p><b>Email:</b> <%= @user.email %></p>
 
         <p>
-          <div class="actions">
-          <%= f.submit "Save", class: "btn btn-success btn-block" %>
-          <%= link_to 'Back', user_path(@user), class: "btn btn-secondary btn-block" %>
+          <div class="btn-group block" role="group" aria-label="...">
+            <%= f.submit "Save", class: "btn btn-secondary" %>
+            <%= link_to 'Back', user_path(@user), class: "btn btn-outline-secondary" %>
           </div>
           
         </p>

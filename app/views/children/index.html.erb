@@ -13,10 +13,14 @@
                 <div class="card-block col-md child-card">
                     <div class="card-block">
                         <h4 class="card-title kid-font"> <%= child[:child_name]%> </h4>
-                        <p class="card-text"><b>Birthday:</b> <%= child[:birthday].strftime( '%m/%d/%Y' ) %> </p>
+                        <% if child[:birthday].blank? %>
+                            <p class="card-text"><b>Birthday:</b> n/a </p>
+                        <% else %>
+                            <p class="card-text"><b>Birthday:</b> <%= child[:birthday].strftime( '%m/%d/%Y' ) %> </p>
+                        <% end %>
                         <p class="card-text"><b>Grade:</b> <%= child[:grade_level] %> </p>
                     </div>
-                    <%= link_to 'Edit Child', edit_child_path(child.id), {:class => "btn btn-primary btn-block"}  %>
+                    <%= link_to 'Edit Child', edit_child_path(child.id), {:class => "btn btn-secondary btn-block"}  %>
                     <hr>
                 </div>
             </div>

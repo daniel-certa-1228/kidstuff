@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 @import url('https://fonts.googleapis.com/css?family=Walter+Turncoat');
+@import 'variables';
 
 body {
     font-family: 'Open Sans', sans-serif;
+    // background-color: $paper;
+}
+
+.bg-blue {
+    background-color: $blue;
 }
 
 .kid-font {
@@ -48,8 +54,10 @@ body {
 
 .main-h2 {
     margin-bottom: .25em;
+    margin-top: .25em;
     font-family: 'Walter Turncoat', cursive;
     letter-spacing: 2px;
+    color: $green;
 }
 
 header {
@@ -80,3 +88,183 @@ header {
         margin-bottom: 0;
     }
 }
+
+/////////////////////////////////////////////
+///////BOOTSTRAP OVERIDES////////////////////
+/////////////////////////////////////////////
+
+.btn-dark {
+    color: #fff;
+    background-color: $pink;
+    border-color: $pink;
+  }
+  
+  .btn-dark:hover {
+    color: #fff;
+    background-color: $pink;
+    border-color: $pink;
+  }
+  
+  .btn-dark:focus, .btn-dark.focus {
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+  }
+  
+  .btn-dark.disabled, .btn-dark:disabled {
+    background-color: $pink;
+    border-color: $pink;
+  }
+  
+  .btn-dark:not([disabled]):not(.disabled):active, .btn-dark:not([disabled]):not(.disabled).active,
+  .show > .btn-dark.dropdown-toggle {
+    color: #fff;
+    background-color: $pink;
+    border-color: $pink;
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+  }
+
+  .btn-outline-dark {
+    color: $pink;
+    background-color: transparent;
+    background-image: none;
+    border-color: $pink;
+  }
+  
+  .btn-outline-dark:hover {
+    color: #fff;
+    background-color: $pink;
+    border-color: $pink;
+  }
+  
+  .btn-outline-dark:focus, .btn-outline-dark.focus {
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+  }
+  
+  .btn-outline-dark.disabled, .btn-outline-dark:disabled {
+    color: $pink;
+    background-color: transparent;
+  }
+  
+  .btn-outline-dark:not([disabled]):not(.disabled):active, .btn-outline-dark:not([disabled]):not(.disabled).active,
+  .show > .btn-outline-dark.dropdown-toggle {
+    color: #fff;
+    background-color: $pink;
+    border-color: $pink;
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+  }
+
+  .btn-secondary {
+    color: #fff;
+    background-color: $green;
+    border-color: $green;
+  }
+  
+  .btn-secondary:hover {
+    color: #fff;
+    background-color: $green;
+    border-color: $green;
+  }
+  
+  .btn-secondary:focus, .btn-secondary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(134, 142, 150, 0.5);
+  }
+  
+  .btn-secondary.disabled, .btn-secondary:disabled {
+    background-color: $green;
+    border-color: $green;
+  }
+  
+  .btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:not([disabled]):not(.disabled).active,
+  .show > .btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: $green;
+    border-color: $green;
+    box-shadow: 0 0 0 0.2rem rgba(134, 142, 150, 0.5);
+  }
+
+  .btn-outline-secondary {
+    color: $green;
+    background-color: transparent;
+    background-image: none;
+    border-color: $green;
+  }
+  
+  .btn-outline-secondary:hover {
+    color: #fff;
+    background-color: $green;
+    border-color: $green;
+  }
+  
+  .btn-outline-secondary:focus, .btn-outline-secondary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(134, 142, 150, 0.5);
+  }
+  
+  .btn-outline-secondary.disabled, .btn-outline-secondary:disabled {
+    color: $green;
+    background-color: transparent;
+  }
+  
+  .btn-outline-secondary:not([disabled]):not(.disabled):active, .btn-outline-secondary:not([disabled]):not(.disabled).active,
+  .show > .btn-outline-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: $green;
+    border-color: $green;
+    box-shadow: 0 0 0 0.2rem rgba(134, 142, 150, 0.5);
+  }
+
+  .btn-danger {
+    color: #fff;
+    background-color: $red;
+    border-color: $red;
+  }
+  
+  .btn-danger:hover {
+    color: #fff;
+    background-color: $red;
+    border-color: $red;
+  }
+  
+  .btn-danger:focus, .btn-danger.focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+  }
+  
+  .btn-danger.disabled, .btn-danger:disabled {
+    background-color: $red;
+    border-color: $red;
+  }
+  
+  .btn-danger:not([disabled]):not(.disabled):active, .btn-danger:not([disabled]):not(.disabled).active,
+  .show > .btn-danger.dropdown-toggle {
+    color: #fff;
+    background-color: $red;
+    border-color: $red;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+  }
+
+  .btn-light {
+    color: #adadad;
+    background-color: #f8f9fa;
+    border-color: #adadad;
+  }
+  
+  .btn-light:hover {
+    color: #adadad;
+    background-color: #e2e6ea;
+    border-color: #adadad;
+  }
+  
+  .btn-light:focus, .btn-light.focus {
+    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+  }
+  
+  .btn-light.disabled, .btn-light:disabled {
+    background-color: #f8f9fa;
+    border-color: #adadad;
+  }
+  
+  .btn-light:not([disabled]):not(.disabled):active, .btn-light:not([disabled]):not(.disabled).active,
+  .show > .btn-light.dropdown-toggle {
+    color: #adadad;
+    background-color: #dae0e5;
+    border-color: #adadad;
+    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+  }
