@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .button-container {
-    min-height: 70vh;
+    min-height: 65vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -17,6 +17,11 @@
 }
 
 .home-btn {
+    font-size: 3em;
+    line-height: 110px;
+}
+
+.home-btn-2 {
     font-size: 3em;
     line-height: 125px;
 }

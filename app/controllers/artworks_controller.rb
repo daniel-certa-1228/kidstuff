@@ -1,4 +1,3 @@
-require 'ocr_space'
 require 'rmagick'
 
 class ArtworksController < ApplicationController
