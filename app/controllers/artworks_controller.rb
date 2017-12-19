@@ -68,6 +68,8 @@ class ArtworksController < ApplicationController
     end
 
     def send_jpg
+        @user = User.find(session[:user_id])
+
         @artwork = Artwork.find(params[:id])
 
         if @artwork.title.blank?
@@ -102,6 +104,8 @@ class ArtworksController < ApplicationController
 
     def mail_it
         @email = params[:artwork][:email]
+        @user_name = params[:artwork][:user_name]
+        @user_email = params[:artwork][:user_email]
         @title = params[:artwork][:title]
         @child = params[:artwork][:child]
         @date = params[:artwork][:date]
@@ -109,7 +113,7 @@ class ArtworksController < ApplicationController
         @artwork_id = params[:artwork][:attachment_id]
         
         if is_valid?(@email)
-            ArtMailer.artwork_mail(@email, @title, @child, @date, @attachment).deliver_later
+            ArtMailer.artwork_mail(@email, @user_name, @user_email, @title, @child, @date, @attachment).deliver_later
             redirect_to artworks_path
             sleep 0.5
             File.delete("#{@attachment}")

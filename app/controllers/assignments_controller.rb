@@ -76,6 +76,8 @@ class AssignmentsController < ApplicationController
     end
 
     def send_pdf
+        @user = User.find(session[:user_id])
+
         @assignment = Assignment.find(params[:id])
 
         if @assignment.title.blank?
@@ -110,6 +112,8 @@ class AssignmentsController < ApplicationController
 
     def mail_it
         @email = params[:assignment][:email]
+        @user_name = params[:assignment][:user_name]
+        @user_email = params[:assignment][:user_email]
         @title = params[:assignment][:title]
         @child = params[:assignment][:child]
         @content = params[:assignment][:content]
@@ -118,7 +122,7 @@ class AssignmentsController < ApplicationController
         @assignment_id = params[:assignment][:attachment_id]
 
         if is_valid?(@email)
-            AssignmentMailer.assignment_mail(@email, @title, @child, @due_date, @content, @attachment).deliver_later
+            AssignmentMailer.assignment_mail(@email, @user_name, @user_email, @title, @child, @due_date, @content, @attachment).deliver_later
             redirect_to assignments_path
             sleep 0.5
             File.delete("#{@attachment}")
