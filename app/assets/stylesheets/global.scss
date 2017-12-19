@@ -77,14 +77,20 @@ header {
 
 .card {
     padding: .5em;
+    overflow: hidden;
 
     h5 {
+      white-space: nowrap;
         margin-bottom: .25rem;
         text-decoration: underline;
     }
 
     p {
         margin-bottom: 0;
+    }
+
+    section {
+      max-width: 150px;
     }
 }
 
