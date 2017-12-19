@@ -29,6 +29,8 @@
             </p>
 
             <%= form.hidden_field :title, :value => @title %>
+            <%= form.hidden_field :user_name, :value => @user.user_name %>
+            <%= form.hidden_field :user_email, :value => @user.email %>
             <%= form.hidden_field :child, :value => @child %>
             <%= form.hidden_field :content, :value => @activity.content %>
             <%= form.hidden_field :date, :value => @parsed_date %>

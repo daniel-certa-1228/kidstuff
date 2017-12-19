@@ -83,6 +83,8 @@ class ActivitiesController < ApplicationController
     end
 
     def send_pdf
+        @user = User.find(session[:user_id])
+
         @activity = Activity.find(params[:id])
         
         if @activity.title.blank?
@@ -123,6 +125,8 @@ class ActivitiesController < ApplicationController
 
     def mail_it
         @email = params[:activity][:email]
+        @user_name = params[:activity][:user_name]
+        @user_email = params[:activity][:user_email]
         @title = params[:activity][:title]
         @child = params[:activity][:child]
         @content = params[:activity][:content]
@@ -132,7 +136,7 @@ class ActivitiesController < ApplicationController
         @activity_id = params[:activity][:attachment_id]
 
         if is_valid?(@email)
-            ActivityMailer.activity_mail(@email, @title,  @child, @date, @time, @content, @attachment).deliver_later
+            ActivityMailer.activity_mail(@email, @user_name, @user_email, @title, @child, @date, @time, @content, @attachment).deliver_later
             redirect_to activities_path
             sleep 0.5
             File.delete("#{@attachment}")

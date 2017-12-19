@@ -1,5 +1,6 @@
-<h1>You've recieved an Assignment from Kid Stuff!</h1>
-  <h2>Title: <span style="text-decoration: underline;"><%= @title %></span></h2>
+<h2>You've recieved an Assignment from <%= @user_name %> (<%= @user_email %>)!</h2>
+<h3>Sent via <a href="https://kidstuffapp.herokuapp.com/">Kid Stuff App</a>.</h3>
+  <p><b>Title:</b> <span style="text-decoration: underline;"><%= @title %></span></p>
   <p><b>Child:</b> <%= @child %></p>
   <p><b>Due Date:</b> <%= @due_date %></p>
   <p><b>Content:</b></p>
