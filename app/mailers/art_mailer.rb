@@ -7,6 +7,6 @@ class ArtMailer < ApplicationMailer
         @child = child
         @title = title
         @date = date
-        mail(to: @address, subject: "You've received Art from #{@user_email} via Kid Stuff App!"
+        mail(to: @address, subject: "You've received Art from #{@user_email} via Kid Stuff App!")
     end
 end
