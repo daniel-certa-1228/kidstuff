@@ -119,6 +119,7 @@ class ArtworksController < ApplicationController
             File.delete("#{@attachment}")
         else
             redirect_to send_art_path(@artwork_id), notice: 'You must enter a valid email address.'
+            # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{flash[:notice]}"
         end
     end
 
