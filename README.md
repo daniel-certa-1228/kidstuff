@@ -7,7 +7,7 @@ Kid Stuff is an organizational tool that utilizes __Optical Character Recognitio
 ![Screen Shot 1](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0778.png "Screen Shot 1")
 ![Screen Shot 3](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0780.png "Screen Shot 3")
 
-### Use your mobile device's camera to scan in Homework or Activity documents- Kid Stuff reads them using OCR and makes them __instantly searchable by content__.
+### Use your mobile device's camera to scan in Homework or Activity documents- Kid Stuff reads them using OCR and makes them _instantly searchable by content_.
 
 ![Screen Shot 5](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0786.png "Screen Shot 5")
 ![Screen Shot 6](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0783.png "Screen Shot 6")
