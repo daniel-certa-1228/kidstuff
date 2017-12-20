@@ -12,7 +12,7 @@ Kid Stuff is an organiztional tool that utilizes __Optical Character Recognition
 ![Screen Shot 5](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0786.png "Screen Shot 5")
 ![Screen Shot 6](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0783.png "Screen Shot 6")
 
-### Kid Stuff events can be saved directly to iCal and documents mailed as PFD's.
+### Kid Stuff events can be saved directly to iCal and documents can be emailed as PFD's.
 
 ![Screen Shot 7](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/ksa_mail.png "Screen Shot 7")
 
