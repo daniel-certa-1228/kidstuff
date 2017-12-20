@@ -9,7 +9,7 @@ class AssignmentMailer < ApplicationMailer
         @child = child
         @due_date = due_date
         @content = content
-        mail(to: @address, subject: "You've received an Assignment from #{@user_name} (#{@user_email}) via Kid Stuff App!")
+        mail(to: @address, subject: "You've received an Assignment from #{@user_email} via Kid Stuff App!")
     end
 
 end
