@@ -4,13 +4,13 @@
 
 Kid Stuff is an organizational tool that utilizes __Optical Character Recognition__ (via [OCR Space API](https://ocr.space/)) to help keep track of a child's Art Projects, Homework, and Extra-Curricular Activities.
 
-<img src="https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0778-a.png" alt="Screen Shot 1" style="width: 250px;"/>
-<img src="https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0780-a.png" alt="Screen Shot 2" style="width: 250px;"/>
+![Screen Shot 1](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0778-a.png "Screen Shot 1")
+![Screen Shot 3](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0780-a.png "Screen Shot 3")
 
 ### Use your mobile device's camera to scan in Homework or Activity documents- Kid Stuff reads them using OCR and makes them _instantly searchable by content_.
 
-<img src="https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0786-a.png" alt="Screen Shot 1" style="width: 250px;"/>
-<img src="https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0783-a.png" alt="Screen Shot 2" style="width: 250px;"/>
+![Screen Shot 5](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0786-a.png "Screen Shot 5")
+![Screen Shot 6](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0783-a.png "Screen Shot 6")
 
 ### Kid Stuff events can be saved directly to iCal and documents can be emailed as PFD's.
 
