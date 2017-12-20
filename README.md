@@ -2,7 +2,7 @@
 
 ### Kid Stuff is __LIVE__ and optimized for __mobile browsing__, so grab your smartphone and go to [https://kidstuffapp.herokuapp.com/](https://kidstuffapp.herokuapp.com/).
 
-Kid Stuff is an organiztional tool that utilizes __Optical Character Recognition__ to help keep track of a child's Homework, Art Projects and Extra-Curricular Activities.
+Kid Stuff is an organiztional tool that utilizes __Optical Character Recognition__ (via [OCR Space API](https://ocr.space/))to help keep track of a child's Homework, Art Projects and Extra-Curricular Activities.
 
 ![Screen Shot 1](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0778.png "Screen Shot 1")
 ![Screen Shot 3](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0780.png "Screen Shot 3")
@@ -16,12 +16,24 @@ Kid Stuff is an organiztional tool that utilizes __Optical Character Recognition
 
 ![Screen Shot 7](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/ksa_mail.png "Screen Shot 7")
 
-<!-- Technologies-
+### Dependencies-
 * Ruby 2.4.2
 * Rails 5.1.4
 * Bootstrap 4.0.0.beta2
-* Database creation
-* Database initialization
-* How to run the test suite
-* Services (job queues, cache servers, search engines, etc.)
-* Deployment instructions -->
+* PostgreSQL 0.18
+* AWS s3
+* [OCR Space API](https://ocr.space/) 
+* icalendar
+* paperclip
+* imagemagick 0.1.3
+* rmagick 2.15
+* mini_magick
+
+### To Run-
+
+1. Fork/clone this repo and `cd` into the root directory.
+1. Run `bundle install`
+1. Run `npm install`
+1. Run `rails db:migrate`
+1. Run `rails server`
+1. Navigate in a browser to `http://localhost:3000` and create a Kid Stuff Account.
