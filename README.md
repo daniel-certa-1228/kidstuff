@@ -2,7 +2,7 @@
 
 ### Kid Stuff is __LIVE__ and optimized for __mobile browsing__, so grab your smartphone and go to [https://kidstuffapp.herokuapp.com/](https://kidstuffapp.herokuapp.com/).
 
-Kid Stuff is an organiztional tool that utilizes __Optical Character Recognition__ (via [OCR Space API](https://ocr.space/))to help keep track of a child's Homework, Art Projects and Extra-Curricular Activities.
+Kid Stuff is an organiztional tool that utilizes __Optical Character Recognition__ (via [OCR Space API](https://ocr.space/)) to help keep track of a child's Homework, Art Projects and Extra-Curricular Activities.
 
 ![Screen Shot 1](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0778.png "Screen Shot 1")
 ![Screen Shot 3](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0780.png "Screen Shot 3")
