@@ -1,24 +1,39 @@
-# README
+# Kid Stuff
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Kid Stuff is __LIVE__ and optimized for __mobile browsing__, so grab your smartphone and go to [https://kidstuffapp.herokuapp.com/](https://kidstuffapp.herokuapp.com/).
 
-Things you may want to cover:
+Kid Stuff is an organiztional tool that utilizes __Optical Character Recognition__ (via [OCR Space API](https://ocr.space/))to help keep track of a child's Homework, Art Projects and Extra-Curricular Activities.
 
-* Ruby version
+![Screen Shot 1](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0778.png "Screen Shot 1")
+![Screen Shot 3](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0780.png "Screen Shot 3")
 
-* System dependencies
+### Use your mobile device's camera to scan in Homework or Activity documents- Kid Stuff reads them using OCR and makes them __instantly searchable by content__.
 
-* Configuration
+![Screen Shot 5](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0786.png "Screen Shot 5")
+![Screen Shot 6](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/IMG_0783.png "Screen Shot 6")
 
-* Database creation
+### Kid Stuff events can be saved directly to iCal and documents mailed as PFD's.
 
-* Database initialization
+![Screen Shot 7](https://s3.us-east-2.amazonaws.com/kidstuffapp/screenshots/ksa_mail.png "Screen Shot 7")
 
-* How to run the test suite
+### Dependencies-
+* Ruby 2.4.2
+* Rails 5.1.4
+* Bootstrap 4.0.0.beta2
+* PostgreSQL 0.18
+* AWS s3
+* [OCR Space API](https://ocr.space/) 
+* icalendar
+* paperclip
+* imagemagick 0.1.3
+* rmagick 2.15
+* mini_magick
 
-* Services (job queues, cache servers, search engines, etc.)
+### To Run-
 
-* Deployment instructions
-
-* ...
+1. Fork/clone this repo and `cd` into the root directory.
+1. Run `bundle install`
+1. Run `npm install`
+1. Run `rails db:migrate`
+1. Run `rails server`
+1. Navigate in a browser to `http://localhost:3000` and create a Kid Stuff Account.
