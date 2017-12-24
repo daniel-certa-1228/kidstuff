@@ -8,6 +8,11 @@
         <%= link_to "Add New", new_child_path, :class => "btn btn-dark ass-button" %>
         <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
     </div>
+
+    <header>
+        <h3><%= flash[:notice] %></h3>
+    </header>
+
         <% @children.where({user_id: session[:user_id]}).each do |child|%>
             <div class="row">
                 <div class="card-block col-md child-card">
