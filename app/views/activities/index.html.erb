@@ -6,7 +6,7 @@
     <% if @activities.where({user_id: session[:user_id]}) != [] %>
         <!-- Search Input-->
         <%= form_tag('/activities/search', method: "get", id: "searchbar", class: "form-inline") do %>
-            <%= text_field_tag(:search_string, nil, class: 'form-control', placeholder: 'Search Activities', id: 'activitysearch-input')%>
+            <%= text_field_tag(:search_string, nil, class: 'form-control', placeholder: 'Search Activities by Keyword', id: 'activitysearch-input')%>
         <% end %>
         <!-- Button Group-->
         <div class="btn-group block" role="group" aria-label="...">
