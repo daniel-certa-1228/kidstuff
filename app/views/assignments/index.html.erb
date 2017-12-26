@@ -5,7 +5,7 @@
     <% if @assignments.where({user_id: session[:user_id]}) != [] %>
         <!-- Search Input-->
         <%= form_tag('/assignments/search', method: "get", id: "searchbar", class: "form-inline") do %>
-            <%= text_field_tag(:search_string, nil, class: 'form-control', placeholder: 'Search Assignments', id: 'asignmentsearch-input')%>
+            <%= text_field_tag(:search_string, nil, class: 'form-control', placeholder: 'Search Assignments by Keyword', id: 'asignmentsearch-input')%>
         <% end %>
         <!-- Button Group-->
         <div class="btn-group block" role="group" aria-label="...">
