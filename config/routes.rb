@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   post '/artworks/send_jpg/mail_it', to: 'artworks#mail_it', as: 'mail_artwork'
   post '/assignments/send_pdf/mail_it', to: 'assignments#mail_it', as: 'mail_assignment'
   post '/activities/send_pdf/mail_it', to: 'activities#mail_it', as: 'mail_activity'
-
+#iCal routing
   get 'activities/to_icalendar/:id', to: 'activities#to_icalendar', as: 'ical_activity'
   get 'assignments/to_icalendar/:id', to: 'assignments#to_icalendar', as: 'ical_assignment'
 end

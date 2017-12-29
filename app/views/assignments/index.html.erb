@@ -1,7 +1,9 @@
 <div class="container center">
+
     <header>
         <h2 class="main-h2">Assignments</h2>
     </header>
+
     <% if @assignments.where({user_id: session[:user_id]}) != [] %>
         <!-- Search Input-->
         <%= form_tag('/assignments/search', method: "get", id: "searchbar", class: "form-inline") do %>
@@ -21,6 +23,5 @@
         </header>
 
         <%= link_to 'Add Assignment', new_assignment_path, {:class => "btn btn-primary btn-block"}  %>
-        
     <% end %>
 </div>

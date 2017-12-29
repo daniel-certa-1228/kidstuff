@@ -8,6 +8,7 @@
         <header>        
             <%= flash[:notice] %>
         </header>
+
         <div class="button-container">
             <%= link_to artworks_path, {:class => "btn btn-dark btn-block home-btn kid-font"}  do %><i class="fa fa-paint-brush" aria-hidden="true"></i> Artwork<%end%>
             <%= link_to assignments_path, {:class => "btn btn-dark btn-block home-btn kid-font"}  do %><i class="fa fa-book" aria-hidden="true"></i> Homework<%end%>
@@ -19,12 +20,14 @@
 <% else %>
 
     <div class="container container-center">
+
         <header>
             <h2 class="main-h2">Welcome to Kid Stuff!</h2>
         </header>
         <header>
             <%= flash[:notice] %>
         </header>
+        
         <div class="button-container-2">
             <%= link_to login_path, {:class => "btn btn-dark btn-block home-btn-2 kid-font"}  do %><i class="fa fa-sign-in" aria-hidden="true"></i> Login<% end %>
             <header>

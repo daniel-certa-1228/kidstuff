@@ -1,6 +1,7 @@
 <div class="container center">
   <div class="row justify-content-center">
     <div class="col-md-8">
+
       <header>
         <h2 class="main-h2">Edit Assignment</h2> 
       </header>    
@@ -9,6 +10,7 @@
           <%= link_to "Back", assignment_path(@assignment), :class => "btn btn-dark ass-button" %>
           <%= link_to "Home", root_path, :class => "btn btn-outline-dark ass-button" %>
       </div>
+      
       <%= flash[:notice] %>
 
       <br><%= image_tag @assignment.avatar.url(:original), class: "img-fluid" %><br><br>

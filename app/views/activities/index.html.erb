@@ -1,8 +1,10 @@
 
 <div class="container center">
+
     <header>
         <h2 class="main-h2">Activities</h2>
     </header>
+
     <% if @activities.where({user_id: session[:user_id]}) != [] %>
         <!-- Search Input-->
         <%= form_tag('/activities/search', method: "get", id: "searchbar", class: "form-inline") do %>
@@ -22,6 +24,5 @@
         </header>
 
         <%= link_to 'Add Activity', new_activity_path, {:class => "btn btn-primary btn-block"}  %>
-        
     <% end %>
 </div>
