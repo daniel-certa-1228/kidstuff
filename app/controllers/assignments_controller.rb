@@ -10,6 +10,8 @@ class AssignmentsController < ApplicationController
 
     def index
         @assignments = Assignment.all.order('created_at DESC')
+        # indexed with newest at top
+
     end
 
     def create
@@ -29,6 +31,7 @@ class AssignmentsController < ApplicationController
     def edit
         @assignment = Assignment.find(params[:id])
         @children = Child.all
+        #children loaded from DB to populate select menu
     end
 
     def update
@@ -42,20 +45,20 @@ class AssignmentsController < ApplicationController
 
     def show
         @assignment = Assignment.find(params[:id])
-
+        # logic to display 'n/a' for blank field
         if @assignment.title.blank?
             @title = "n/a"
         else
             @title = @assignment.title
         end
-
+        # logic to display 'n/a' for blank field
         if @assignment.child_id.blank?
             @child = "n/a"
         else
             @child = Child.where(id: @assignment.child_id)
             @child = @child[0].child_name
         end
-
+        # logic to display 'n/a' for blank field
         if @assignment.due_date.blank?
             @parsed_date = "n/a"
         else
@@ -79,20 +82,20 @@ class AssignmentsController < ApplicationController
         @user = User.find(session[:user_id])
 
         @assignment = Assignment.find(params[:id])
-
+        # logic to display 'n/a' for blank field
         if @assignment.title.blank?
             @title = "n/a"
         else
             @title = @assignment.title
         end
-
+        # logic to display 'n/a' for blank field
         if @assignment.child_id.blank?
             @child = "n/a"
         else
             @child = Child.where(id: @assignment.child_id)
             @child = @child[0].child_name
         end
-
+        # logic to display 'n/a' for blank field
         if @assignment.due_date.blank?
             @parsed_date = "n/a"
         else

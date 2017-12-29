@@ -7,6 +7,7 @@ class ArtworksController < ApplicationController
 
     def index
         @artworks = Artwork.all.order('created_at DESC')
+        # indexed with newest at top
     end
 
     def create
@@ -21,6 +22,7 @@ class ArtworksController < ApplicationController
     def edit
         @artwork = Artwork.find(params[:id])
         @children = Child.all
+        #children loaded from DB to populate select menu
     end
 
     def update
@@ -34,20 +36,20 @@ class ArtworksController < ApplicationController
 
     def show
         @artwork = Artwork.find(params[:id])
-
+        # logic to display 'n/a' for blank field
         if @artwork.title.blank?
             @title = "n/a"
         else
             @title = @artwork.title
         end
-
+        # logic to display 'n/a' for blank field
         if @artwork.child_id.blank?
             @child = "n/a"
         else
             @child = Child.where(id: @artwork.child_id)
             @child = @child[0].child_name
         end
-
+        # logic to display 'n/a' for blank field
         if @artwork.date.blank?
             @parsed_date = "n/a"
         else

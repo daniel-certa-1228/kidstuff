@@ -11,6 +11,7 @@ class ActivitiesController < ApplicationController
 
     def index
         @activities = Activity.all.order('created_at DESC')
+        # indexed with newest at top
     end
 
     def create
@@ -30,6 +31,7 @@ class ActivitiesController < ApplicationController
     def edit
         @activity = Activity.find(params[:id])
         @children = Child.all
+        #children loaded from DB to populate select menu
     end
 
     def update
@@ -43,20 +45,20 @@ class ActivitiesController < ApplicationController
 
     def show
         @activity = Activity.find(params[:id])
-
+        # logic to display 'n/a' for blank field
         if @activity.title.blank?
             @title = "n/a"
         else
             @title = @activity.title
         end
-
+        # logic to display 'n/a' for blank field
         if @activity.child_id.blank?
             @child = "n/a"
         else
             @child = Child.where(id: @activity.child_id)
             @child = @child[0].child_name
         end
-
+        # logic to display 'n/a' for blank field
         if @activity.date.blank?
             @parsed_date = "n/a"
         else
@@ -86,26 +88,26 @@ class ActivitiesController < ApplicationController
         @user = User.find(session[:user_id])
 
         @activity = Activity.find(params[:id])
-        
+        # logic to display 'n/a' for blank field        
         if @activity.title.blank?
             @title = "n/a"
         else
             @title = @activity.title
         end
-        
+        # logic to display 'n/a' for blank field        
         if @activity.child_id.blank?
             @child = "n/a"
         else
             @child = Child.where(id: @activity.child_id)
             @child = @child[0].child_name
         end
-
+        # logic to display 'n/a' for blank field
         if @activity.date.blank?
             @parsed_date = "n/a"
         else
             @parsed_date = @activity.date.strftime( '%m/%d/%Y' )
         end
-
+        # logic to display 'n/a' for blank field
         if @activity.time.blank?
             @parsed_time = "n/a"
         else
