@@ -2,25 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// button container for logged IN home view
 .button-container {
     min-height: 65vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-
+// button container for logged OUT home view
 .button-container-2 {
     min-height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-
+// button styles for logged IN view
 .home-btn {
     font-size: 3em;
     line-height: 110px;
 }
-
+// button styles for logged OUT view
 .home-btn-2 {
     font-size: 3em;
     line-height: 125px;

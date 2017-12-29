@@ -1,7 +1,9 @@
 <div class="container center">
+
     <header>
         <h2 class="main-h2">Artwork</h2>
     </header>
+
     <% if @artworks.where({user_id: session[:user_id]}) != [] %>
         <!-- Search Input-->
         <%= form_tag('/artworks/search', method: "get", id: "searchbar", class: "form-inline") do %>
@@ -20,7 +22,6 @@
             <h4 class="not-yet-message">No Artwork added yet!</h4>
         </header>
 
-        <%= link_to 'Add Artwork', new_artwork_path, {:class => "btn btn-primary btn-block"}  %>
-        
+        <%= link_to 'Add Artwork', new_artwork_path, {:class => "btn btn-primary btn-block"}  %>  
     <% end %>
 </div>

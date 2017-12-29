@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
-@import url('https://fonts.googleapis.com/css?family=Walter+Turncoat');
-@import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700'); //main font
+@import url('https://fonts.googleapis.com/css?family=Walter+Turncoat');  //'kid' font
+@import 'variables'; //variable.scss is the color pallette
 
 body {
     font-family: 'Open Sans', sans-serif;
@@ -22,9 +22,21 @@ body {
         font-size: .8em;
     }
 }
-
+// main content container - sets bottom padding to make room for footer
 .container {
     padding-bottom: 40px;
+}
+// main title of all pages
+.main-h2 {
+  margin-bottom: 0;
+  margin-top: 0;
+  font-family: 'Walter Turncoat', cursive;
+  letter-spacing: 2px;
+  color: $green;
+}
+
+header {
+  text-align: center;
 }
 
 .row {
@@ -49,18 +61,6 @@ body {
 }
 .delete-btn {
     margin-top: 1em;
-}
-
-.main-h2 {
-    margin-bottom: 0;
-    margin-top: 0;
-    font-family: 'Walter Turncoat', cursive;
-    letter-spacing: 2px;
-    color: $green;
-}
-
-header {
-    text-align: center;
 }
 
 .not-yet-message {

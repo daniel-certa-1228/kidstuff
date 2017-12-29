@@ -1,5 +1,6 @@
 <div class="container center">
     <% if @children.where({user_id: session[:user_id]}) != [] %>
+    
     <header>
         <h2 class="main-h2">Children</h2>
     </header>
