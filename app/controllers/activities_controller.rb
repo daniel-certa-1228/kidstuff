@@ -114,6 +114,7 @@ class ActivitiesController < ApplicationController
             @parsed_time = @activity.time.strftime( '%l:%M%p' )
         end
 
+        #connect to s3 bucket to get the jpg
         s3 = Aws::S3::Client.new(
             region: ENV.fetch('AWS_REGION'),
             access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
@@ -122,6 +123,7 @@ class ActivitiesController < ApplicationController
 
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "activities/#{@activity.id}.original.jpg")
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
+        #convert from blob to pdf & save to local disk
         @new_pdf.write("kidstuff_activity_#{@activity.id}.pdf")
     end
 
@@ -140,8 +142,8 @@ class ActivitiesController < ApplicationController
         if is_valid?(@email)
             ActivityMailer.activity_mail(@email, @user_name, @user_email, @title, @child, @date, @time, @content, @attachment).deliver_later
             redirect_to activities_path
-            sleep 0.5
-            File.delete("#{@attachment}")
+            sleep 0.5 #half-second delay ensures that the file is still there when the email is sent
+            File.delete("#{@attachment}") #file deleted from root level after copy is sent
         else
             redirect_to send_activity_path(@activity_id), notice: 'You must enter a valid email address.'
         end
@@ -173,8 +175,10 @@ class ActivitiesController < ApplicationController
 
     def to_text
         image = MiniMagick::Image.new(params[:activity][:avatar].path)
-        image = image.resize "1200x1800"
+        image = image.resize "1200x1800" #image needs to be resized to avoid sending too large a file to OCR Space
         resource = OcrSpace::Resource.new(apikey: ENV.fetch('OCR_API_KEY'))
+        #clean_convert takes the parsed text and strips out newlines
+        #@activity.content is then saved to db
         @activity.content = resource.clean_convert file: image.path
     end
 

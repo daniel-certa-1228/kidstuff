@@ -102,6 +102,7 @@ class AssignmentsController < ApplicationController
             @parsed_date = @assignment.due_date.strftime( '%m/%d/%Y' )
         end
 
+        #connect to s3 bucket to get the jpg
         s3 = Aws::S3::Client.new(
             region: ENV.fetch('AWS_REGION'),
             access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
@@ -110,6 +111,7 @@ class AssignmentsController < ApplicationController
 
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "assignments/#{@assignment.id}.original.jpg")
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
+        #convert from blob to pdf & save to local disk
         @new_pdf.write("kidstuff_assignment_#{@assignment.id}.pdf")
     end
 
@@ -127,8 +129,8 @@ class AssignmentsController < ApplicationController
         if is_valid?(@email)
             AssignmentMailer.assignment_mail(@email, @user_name, @user_email, @title, @child, @due_date, @content, @attachment).deliver_later
             redirect_to assignments_path
-            sleep 0.5
-            File.delete("#{@attachment}")
+            sleep 0.5 #half-second delay ensures that the file is still there when the email is sent
+            File.delete("#{@attachment}") #file deleted from root level after copy is sent
         else
             redirect_to send_assignment_path(@assignment_id), notice: 'You must enter a valid email address.'
         end
@@ -161,8 +163,10 @@ class AssignmentsController < ApplicationController
 
     def to_text
         image = MiniMagick::Image.new(params[:assignment][:avatar].path)
-        image = image.resize "1200x1800"
+        image = image.resize "1200x1800" #image needs to be resized to avoid sending too large a file to OCR Space
         resource = OcrSpace::Resource.new(apikey: ENV.fetch('OCR_API_KEY'))
+        #clean_convert takes the parsed text and strips out newlines
+        #@activity.content is then saved to db
         @assignment.content = resource.clean_convert file: image.path
     end
 
