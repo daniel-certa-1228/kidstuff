@@ -73,20 +73,20 @@ class ArtworksController < ApplicationController
         @user = User.find(session[:user_id])
 
         @artwork = Artwork.find(params[:id])
-
+        # logic to display 'n/a' for blank field
         if @artwork.title.blank?
             @title = "n/a"
         else
             @title = @artwork.title
         end
-
+        # logic to display 'n/a' for blank field
         if @artwork.child_id.blank?
             @child = "n/a"
         else
             @child = Child.where(id: @artwork.child_id)
             @child = @child[0].child_name
         end
-
+        # logic to display 'n/a' for blank field
         if @artwork.date.blank?
             @parsed_date = "n/a"
         else
