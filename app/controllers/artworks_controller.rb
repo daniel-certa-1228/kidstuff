@@ -7,6 +7,7 @@ class ArtworksController < ApplicationController
 
     def index
         @artworks = Artwork.all.order('created_at DESC')
+        # indexed with newest at top
     end
 
     def create
@@ -21,6 +22,7 @@ class ArtworksController < ApplicationController
     def edit
         @artwork = Artwork.find(params[:id])
         @children = Child.all
+        #children loaded from DB to populate select menu
     end
 
     def update
@@ -34,20 +36,20 @@ class ArtworksController < ApplicationController
 
     def show
         @artwork = Artwork.find(params[:id])
-
+        # logic to display 'n/a' for blank field
         if @artwork.title.blank?
             @title = "n/a"
         else
             @title = @artwork.title
         end
-
+        # logic to display 'n/a' for blank field
         if @artwork.child_id.blank?
             @child = "n/a"
         else
             @child = Child.where(id: @artwork.child_id)
             @child = @child[0].child_name
         end
-
+        # logic to display 'n/a' for blank field
         if @artwork.date.blank?
             @parsed_date = "n/a"
         else
@@ -71,34 +73,36 @@ class ArtworksController < ApplicationController
         @user = User.find(session[:user_id])
 
         @artwork = Artwork.find(params[:id])
-
+        # logic to display 'n/a' for blank field
         if @artwork.title.blank?
             @title = "n/a"
         else
             @title = @artwork.title
         end
-
+        # logic to display 'n/a' for blank field
         if @artwork.child_id.blank?
             @child = "n/a"
         else
             @child = Child.where(id: @artwork.child_id)
             @child = @child[0].child_name
         end
-
+        # logic to display 'n/a' for blank field
         if @artwork.date.blank?
             @parsed_date = "n/a"
         else
             @parsed_date = @artwork.date.strftime( '%m/%d/%Y' )
         end
 
+        #connect to s3 bucket to get the jpg
         s3 = Aws::S3::Client.new(
             region: ENV.fetch('AWS_REGION'),
             access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
             secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY')
-          )
+            )
 
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "artworks/#{@artwork.id}.original.jpg")
         @saved_jpg = Magick::Image.from_blob(@jpeg.body.read)[0]
+        #convert from blob to jpeg & save to local disk
         @saved_jpg.write("kidstuff_artwork_#{@artwork.id}.jpg")
     end
 
@@ -115,11 +119,10 @@ class ArtworksController < ApplicationController
         if is_valid?(@email)
             ArtMailer.artwork_mail(@email, @user_name, @user_email, @title, @child, @date, @attachment).deliver_later
             redirect_to artworks_path
-            sleep 0.5
-            File.delete("#{@attachment}")
+            sleep 0.5 #half-second delay ensures that the file is still there when the email is sent
+            File.delete("#{@attachment}") #file deleted from root level after copy is sent
         else
             redirect_to send_art_path(@artwork_id), notice: 'You must enter a valid email address.'
-            # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{flash[:notice]}"
         end
     end
 
