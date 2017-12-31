@@ -119,21 +119,22 @@ header {
 
 /* Full Width Animation Bar */
 @-moz-keyframes fullexpand {
-  0%  { width: 0px;
+  0%  { 
+    -moz-width: 0px;
 }
 
-100% {
-  width: 100%;
-}	
+  100% {
+    -moz-width: 100%;
+  }	
 }
 
 @-webkit-keyframes fullexpand {
   0% {
-      width: 0px;
+    -webkit-width: 0px;
   }
 
   100% {
-      width: 100%;
+    -webkit-width: 100%;
   };
 }
 /////////////////////////////////////////////
