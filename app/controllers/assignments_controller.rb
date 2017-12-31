@@ -15,16 +15,22 @@ class AssignmentsController < ApplicationController
     end
 
     def create
-        @assignment = Assignment.new(assignment_params)
-        if is_photo?(params[:assignment][:avatar].path)
-            to_text
-            if @assignment.save
-                redirect_to assignments_path
+        begin
+            @assignment = Assignment.new(assignment_params)
+            if is_photo?(params[:assignment][:avatar].path)
+                to_text
+                if @assignment.save
+                    redirect_to assignments_path
+                else
+                    render 'new'
+                end
             else
-                render 'new'
+                render 'new'            
             end
-        else
-            render 'new'            
+        rescue NoMethodError => e
+            # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{e}"
+            flash[:error] = "Please attach an image!"
+            redirect_to new_assignment_path
         end
     end
 

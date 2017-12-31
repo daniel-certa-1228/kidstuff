@@ -15,16 +15,22 @@ class ActivitiesController < ApplicationController
     end
 
     def create
-        @activity = Activity.new(activity_params)
-        if is_photo?(params[:activity][:avatar].path)
-            to_text
-            if @activity.save
-                redirect_to activities_path
+        begin
+            @activity = Activity.new(activity_params)
+            if is_photo?(params[:activity][:avatar].path)
+                to_text
+                if @activity.save
+                    redirect_to activities_path
+                else
+                    render 'new'
+                end
             else
                 render 'new'
             end
-        else
-            render 'new'
+        rescue NoMethodError => e
+            # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{e}"
+            flash[:error] = "Please attach an image!"
+            redirect_to new_activity_path
         end
     end
 

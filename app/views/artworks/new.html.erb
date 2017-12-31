@@ -44,6 +44,10 @@
             <%= form.date_field :date, class: "form-control"  %>
             </p>
 
+            <header>         
+              <h5 class="flash-h5 red"><%= flash[:error] %></h5>
+            </header>
+
             <p>
             <%= form.label "Scan" %><br>
             <%= form.file_field :avatar %>

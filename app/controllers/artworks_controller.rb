@@ -11,11 +11,21 @@ class ArtworksController < ApplicationController
     end
 
     def create
-        @artwork = Artwork.new(artwork_params)
-        if @artwork.save
-            redirect_to artworks_path
-        else
-            render 'new'
+        begin
+            @artwork = Artwork.new(artwork_params)
+            if is_photo?(params[:activity][:avatar].path)
+                if @artwork.save
+                    redirect_to artworks_path
+                else
+                    render 'new'
+                end
+            else
+                render 'new'
+            end
+        rescue NoMethodError => e
+            # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{e}"
+            flash[:error] = "Please attach an image!"
+            redirect_to new_artwork_path
         end
     end
 
@@ -130,6 +140,14 @@ class ArtworksController < ApplicationController
 
         def artwork_params
             params.require(:artwork).permit(:title, :date, :avatar, :child_id, :user_id )
+        end
+
+        def is_photo?(file)
+            if file.to_s.downcase.include?(".gif") or file.to_s.downcase.include?(".png") or file.to_s.downcase.include?(".jpg") or file.to_s.downcase.include?(".jpeg")
+                return true
+            else
+                return false
+            end
         end
 
         def is_valid?(email)
