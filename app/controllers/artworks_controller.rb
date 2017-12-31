@@ -23,7 +23,7 @@ class ArtworksController < ApplicationController
                 render 'new'
             end
         rescue NoMethodError => e
-            puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{e}"
+            # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{e}"
             flash[:error] = "Please attach an image!"
             redirect_to new_artwork_path
         end
