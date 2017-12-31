@@ -114,7 +114,10 @@ header {
   position: absolute;
   box-shadow: 0px 0px 10px 1px rgba(2, 207, 19,0.4);
   -moz-animation: fullexpand 6s 0.1s ease-out;
-  -webkit-animation: fullexpand 6s 0.1s ease-out;
+  -webkit-animation-name: fullexpand;
+  -webkit-animation-delay: 0.1s;
+  -webkit-animation-duration: 6s;
+  -webkit-animation-transition-timing-function: ease-out;
 }
 
 /* Full Width Animation Bar */
