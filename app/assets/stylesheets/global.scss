@@ -113,8 +113,8 @@ header {
   background: $pink;
   position: absolute;
   box-shadow: 0px 0px 10px 1px rgba(2, 207, 19,0.4);
-  -moz-animation: fullexpand 6s ease-out;
-  -webkit-animation: fullexpand 6s ease-out;
+  -moz-animation: fullexpand 6s 0.1s ease-out;
+  -webkit-animation: fullexpand 6s 0.1s ease-out;
 }
 
 /* Full Width Animation Bar */
