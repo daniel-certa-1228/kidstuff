@@ -13,7 +13,7 @@ class ArtworksController < ApplicationController
     def create
         begin
             @artwork = Artwork.new(artwork_params)
-            if is_photo?(params[:activity][:avatar].path)
+            if is_photo?(params[:artwork][:avatar].path)
                 if @artwork.save
                     redirect_to artworks_path
                 else
