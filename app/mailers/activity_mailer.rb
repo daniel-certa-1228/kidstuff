@@ -10,6 +10,6 @@ class ActivityMailer < ApplicationMailer
         @date = date
         @time = time
         @content = content
-        mail(to: @address, subject: "You've received an Activity from #{@user_email} via Kid Stuff App!")
+        mail(to: @address, reply_to: @user_email, subject: "You've received an Activity from #{@user_email} via Kid Stuff App!")
     end
 end
