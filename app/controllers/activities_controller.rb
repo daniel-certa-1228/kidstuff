@@ -145,7 +145,7 @@ class ActivitiesController < ApplicationController
         @date = params[:activity][:date]
         @time = params[:activity][:time]
         @attachment = "kidstuff_activity_#{params[:activity][:attachment_id]}.pdf"
-        @attachment_cal = "#{params[:activity][:title]}.ics"
+        @attachment_cal = "#{params[:activity][:title]} | ID-#{params[:activity][:attachment_id]}.ics"
         @activity_id = params[:activity][:attachment_id]
 
         if is_valid?(@email)
@@ -153,6 +153,7 @@ class ActivitiesController < ApplicationController
             redirect_to activities_path
             sleep 0.5 #half-second delay ensures that the file is still there when the email is sent
             File.delete("#{@attachment}") #file deleted from root level after copy is sent
+            File.delete("#{Rails.root}/tmp/ics_files/#{@attachment_cal}")
         else
             redirect_to send_activity_path(@activity_id), notice: 'You must enter a valid email address.'
         end
@@ -205,21 +206,33 @@ class ActivitiesController < ApplicationController
     end
 
     def ical_attachment(date, time, title, id)
-        # puts date
-        # puts time
-        # puts title
-        @start_time = DateTime.parse("#{date.strftime( '%Y-%m-%d' )} #{time.strftime( '%H:%M:%S' )}")
+
+        if date.blank? && time.blank?
+            @start_time = DateTime.now
+        elsif date.blank?
+            @start_time = DateTime.now
+        elsif time.blank?
+            @start_time = DateTime.parse("#{date.strftime( '%Y-%m-%d' )} 08:00:00}")
+        else
+            @start_time = DateTime.parse("#{date.strftime( '%Y-%m-%d' )} #{time.strftime( '%H:%M:%S' )}")
+        end
+
+        if title == ""
+            @title = ""
+        else
+            @title = title
+        end
 
         cal = Icalendar::Calendar.new           
         event = Icalendar::Event.new
         event.dtstart = @start_time
         event.dtend = @start_time + 1.hour
-        event.summary = title
+        event.summary = @title
 
         cal.add_event(event)            
         cal.publish
 
-        file = File.new("tmp/ics_files/#{title}.ics", "w+")
+        file = File.new("tmp/ics_files/#{@title} | ID-#{id}.ics", "w+")
         file.write(cal.to_ical)
         file.close
     end
