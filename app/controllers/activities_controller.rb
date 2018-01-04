@@ -119,7 +119,7 @@ class ActivitiesController < ApplicationController
         else
             @parsed_time = @activity.time.strftime( '%l:%M%p' )
         end
-
+        ##### GENERATE PDF ######################
         #connect to s3 bucket to get the jpg
         s3 = Aws::S3::Client.new(
             region: ENV.fetch('AWS_REGION'),
@@ -131,6 +131,8 @@ class ActivitiesController < ApplicationController
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
         #convert from blob to pdf & save to local disk
         @new_pdf.write("kidstuff_activity_#{@activity.id}.pdf")
+        ##### GENERATE ICS ######################
+        ical_attachment(@activity.date, @activity.time, @activity.title, @activity.id)
     end
 
     def mail_it
@@ -143,10 +145,11 @@ class ActivitiesController < ApplicationController
         @date = params[:activity][:date]
         @time = params[:activity][:time]
         @attachment = "kidstuff_activity_#{params[:activity][:attachment_id]}.pdf"
+        @attachment_cal = "#{params[:activity][:title]}.ics"
         @activity_id = params[:activity][:attachment_id]
 
         if is_valid?(@email)
-            ActivityMailer.activity_mail(@email, @user_name, @user_email, @title, @child, @date, @time, @content, @attachment).deliver_later
+            ActivityMailer.activity_mail(@email, @user_name, @user_email, @title, @child, @date, @time, @content, @attachment, @attachment_cal).deliver_later
             redirect_to activities_path
             sleep 0.5 #half-second delay ensures that the file is still there when the email is sent
             File.delete("#{@attachment}") #file deleted from root level after copy is sent
@@ -199,5 +202,25 @@ class ActivitiesController < ApplicationController
     def is_valid?(email)
         regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
         regex.match?(email)
+    end
+
+    def ical_attachment(date, time, title, id)
+        # puts date
+        # puts time
+        # puts title
+        @start_time = DateTime.parse("#{date.strftime( '%Y-%m-%d' )} #{time.strftime( '%H:%M:%S' )}")
+
+        cal = Icalendar::Calendar.new           
+        event = Icalendar::Event.new
+        event.dtstart = @start_time
+        event.dtend = @start_time + 1.hour
+        event.summary = title
+
+        cal.add_event(event)            
+        cal.publish
+
+        file = File.new("tmp/ics_files/#{title}.ics", "w+")
+        file.write(cal.to_ical)
+        file.close
     end
 end
