@@ -28,7 +28,6 @@ class ActivitiesController < ApplicationController
                 render 'new'
             end
         rescue NoMethodError => e
-            # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{e}"
             flash[:error] = "Please attach an image!"
             redirect_to new_activity_path
         end
@@ -92,7 +91,6 @@ class ActivitiesController < ApplicationController
 
     def send_pdf
         @user = User.find(session[:user_id])
-
         @activity = Activity.find(params[:id])
         # logic to display 'n/a' for blank field        
         if @activity.title.blank?

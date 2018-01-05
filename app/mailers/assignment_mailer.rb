@@ -1,7 +1,10 @@
 class AssignmentMailer < ApplicationMailer
 
-    def assignment_mail(address, user_name, user_email, title, child, due_date, content, attachment)                                            
-        attachments["#{attachment}"] = File.read( "#{Rails.root}/#{attachment}" )
+    def assignment_mail(address, user_name, user_email, title, child, due_date, content, attachment, attachment_cal)                                            
+        attachments["#{attachment}"] = File.read("#{Rails.root}/tmp/send_pics/#{attachment}")
+        if attachment_cal != [] #only attaches ical file if it exists
+            attachments["#{attachment_cal}"] = File.read( "#{Rails.root}/tmp/ics_files/#{attachment_cal}" )
+        end
         @user_name =  user_name
         @user_email = user_email
         @address = address
