@@ -115,7 +115,7 @@ class AssignmentsController < ApplicationController
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "assignments/#{@assignment.id}.original.jpg")
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
         #convert from blob to pdf & save to local disk
-        @new_pdf.write("#{Rails.root}/tmp/send_pics/kidstuff_assignment_#{@assignment.id}.pdf")
+        @new_pdf.write("kidstuff_assignment_#{@assignment.id}.pdf")
         ##### GENERATE ICS ######################
         if @assignment.due_date.present?
             ical_attachment(@assignment.due_date, @assignment.title, @assignment.content, @assignment.id)
@@ -147,9 +147,9 @@ class AssignmentsController < ApplicationController
             AssignmentMailer.assignment_mail(@email, @user_name, @user_email, @title, @child, @due_date, @content, @attachment, @attachment_cal).deliver_later
             redirect_to assignments_path
             sleep 0.5 #half-second delay ensures that the file is still there when the email is sent
-            File.delete("#{Rails.root}/tmp/send_pics/#{@attachment}") #file deleted from temp after copy is sent
+            File.delete("#{@attachment}") #file deleted from root after copy is sent
             if @attachment_cal != []
-                File.delete("#{Rails.root}/tmp/ics_files/#{@attachment_cal}")#file deleted from temp after copy is sent
+                File.delete("#{@attachment_cal}")#file deleted from root after copy is sent
             end
         else
             redirect_to send_assignment_path(@assignment_id), notice: 'You must enter a valid email address.'
@@ -224,7 +224,7 @@ class AssignmentsController < ApplicationController
         cal.add_event(event)            
         cal.publish
 
-        file = File.new("tmp/ics_files/#{@title} | ID ##{id}.ics", "w+")
+        file = File.new("#{@title} | ID ##{id}.ics", "w+")
         file.write(cal.to_ical)
         file.close
     end

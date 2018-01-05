@@ -1,8 +1,8 @@
 class ActivityMailer < ApplicationMailer
     def activity_mail(address, user_name, user_email, title, child, date, time, content, attachment, attachment_cal)
-        attachments["#{attachment}"] = File.read("#{Rails.root}/tmp/send_pics/#{attachment}")
+        attachments["#{attachment}"] = File.read("#{Rails.root}/#{attachment}")
         if attachment_cal != [] #only attaches ical file if it exists
-            attachments["#{attachment_cal}"] = File.read( "#{Rails.root}/tmp/ics_files/#{attachment_cal}" )
+            attachments["#{attachment_cal}"] = File.read( "#{Rails.root}/#{attachment_cal}" )
         end
         @address = address
         @user_name =  user_name

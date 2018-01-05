@@ -128,7 +128,7 @@ class ActivitiesController < ApplicationController
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "activities/#{@activity.id}.original.jpg")
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
         #convert from blob to pdf & save to local disk
-        @new_pdf.write("#{Rails.root}/tmp/send_pics/kidstuff_activity_#{@activity.id}.pdf")
+        @new_pdf.write("kidstuff_activity_#{@activity.id}.pdf")
         ##### GENERATE ICS ######################
         if @activity.date.present?
             ical_attachment(@activity.date, @activity.time, @activity.title, @activity.content, @activity.id)
@@ -161,9 +161,9 @@ class ActivitiesController < ApplicationController
             ActivityMailer.activity_mail(@email, @user_name, @user_email, @title, @child, @date, @time, @content, @attachment, @attachment_cal).deliver_later
             redirect_to activities_path
             sleep 0.5 #half-second delay ensures that the file is still there when the email is sent
-            File.delete("#{Rails.root}/tmp/send_pics/#{@attachment}") #file deleted from temp after copy is sent
+            File.delete("#{@attachment}") #file deleted from root after copy is sent
             if @attachment_cal != []
-                File.delete("#{Rails.root}/tmp/ics_files/#{@attachment_cal}")#file deleted from temp after copy is sent
+                File.delete("#{@attachment_cal}")#file deleted from root after copy is sent
             end
         else
             redirect_to send_activity_path(@activity_id), notice: 'You must enter a valid email address.'
@@ -240,7 +240,7 @@ class ActivitiesController < ApplicationController
         cal.add_event(event)            
         cal.publish
 
-        file = File.new("tmp/ics_files/#{@title} | ID ##{id}.ics", "w+")
+        file = File.new("#{@title} | ID ##{id}.ics", "w+")
         file.write(cal.to_ical)
         file.close
     end
