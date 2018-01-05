@@ -37,6 +37,7 @@
             <%= form.hidden_field :child, :value => @child %>
             <%= form.hidden_field :content, :value => @assignment.content %>
             <%= form.hidden_field :due_date, :value => @parsed_date %>
+            <%= form.hidden_field :cal_attached, :value => @cal_attached %>
             <%= form.hidden_field :attachment_id, :value => @assignment.id %>
             
             <%=  form.submit "Send", class: "btn btn-secondary btn-block" %>

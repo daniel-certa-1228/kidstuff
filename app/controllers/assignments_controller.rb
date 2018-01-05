@@ -11,7 +11,6 @@ class AssignmentsController < ApplicationController
     def index
         @assignments = Assignment.all.order('created_at DESC')
         # indexed with newest at top
-
     end
 
     def create
@@ -28,7 +27,6 @@ class AssignmentsController < ApplicationController
                 render 'new'            
             end
         rescue NoMethodError => e
-            # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{e}"
             flash[:error] = "Please attach an image!"
             redirect_to new_assignment_path
         end
@@ -86,7 +84,6 @@ class AssignmentsController < ApplicationController
 
     def send_pdf
         @user = User.find(session[:user_id])
-
         @assignment = Assignment.find(params[:id])
         # logic to display 'n/a' for blank field
         if @assignment.title.blank?
@@ -107,7 +104,7 @@ class AssignmentsController < ApplicationController
         else
             @parsed_date = @assignment.due_date.strftime( '%m/%d/%Y' )
         end
-
+        ##### GENERATE PDF ######################
         #connect to s3 bucket to get the jpg
         s3 = Aws::S3::Client.new(
             region: ENV.fetch('AWS_REGION'),
@@ -118,7 +115,14 @@ class AssignmentsController < ApplicationController
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "assignments/#{@assignment.id}.original.jpg")
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
         #convert from blob to pdf & save to local disk
-        @new_pdf.write("kidstuff_assignment_#{@assignment.id}.pdf")
+        @new_pdf.write("#{Rails.root}/tmp/send_pics/kidstuff_assignment_#{@assignment.id}.pdf")
+        ##### GENERATE ICS ######################
+        if @assignment.due_date.present?
+            ical_attachment(@assignment.due_date, @assignment.title, @assignment.content, @assignment.id)
+            @cal_attached = true
+        else
+            @cal_attached = false
+        end 
     end
 
     def mail_it
@@ -129,14 +133,24 @@ class AssignmentsController < ApplicationController
         @child = params[:assignment][:child]
         @content = params[:assignment][:content]
         @due_date = params[:assignment][:due_date]
+        @cal_attached = (params[:assignment][:cal_attached])
         @attachment = "kidstuff_assignment_#{params[:assignment][:attachment_id]}.pdf"
         @assignment_id = params[:assignment][:attachment_id]
 
+        if @cal_attached == "true"
+            @attachment_cal = "#{params[:assignment][:title]} | ID ##{params[:assignment][:attachment_id]}.ics"
+        else
+            @attachment_cal = []
+        end
+
         if is_valid?(@email)
-            AssignmentMailer.assignment_mail(@email, @user_name, @user_email, @title, @child, @due_date, @content, @attachment).deliver_later
+            AssignmentMailer.assignment_mail(@email, @user_name, @user_email, @title, @child, @due_date, @content, @attachment, @attachment_cal).deliver_later
             redirect_to assignments_path
             sleep 0.5 #half-second delay ensures that the file is still there when the email is sent
-            File.delete("#{@attachment}") #file deleted from root level after copy is sent
+            File.delete("#{Rails.root}/tmp/send_pics/#{@attachment}") #file deleted from temp after copy is sent
+            if @attachment_cal != []
+                File.delete("#{Rails.root}/tmp/ics_files/#{@attachment_cal}")#file deleted from temp after copy is sent
+            end
         else
             redirect_to send_assignment_path(@assignment_id), notice: 'You must enter a valid email address.'
         end
@@ -154,6 +168,8 @@ class AssignmentsController < ApplicationController
                 event.dtstart = @start_time
                 event.dtend = @start_time + 1.hour
                 event.summary = @assignment.title
+                event.description = @assignment.content
+
     
                 cal.add_event(event)            
                 cal.publish
@@ -187,5 +203,29 @@ class AssignmentsController < ApplicationController
     def is_valid?(email)
         regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
         regex.match?(email)
+    end
+
+    def ical_attachment(due_date, title, content, id)
+        @start_time = DateTime.parse("#{due_date.strftime( '%Y-%m-%d' )} 08:00:00}")
+
+        if title == ""
+            @title = "Untitled Event"
+        else
+            @title = title
+        end
+
+        cal = Icalendar::Calendar.new           
+        event = Icalendar::Event.new
+        event.dtstart = @start_time
+        event.dtend = @start_time + 1.hour
+        event.summary = @title
+        event.description = content
+
+        cal.add_event(event)            
+        cal.publish
+
+        file = File.new("tmp/ics_files/#{@title} | ID ##{id}.ics", "w+")
+        file.write(cal.to_ical)
+        file.close
     end
 end

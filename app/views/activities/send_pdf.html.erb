@@ -38,6 +38,7 @@
             <%= form.hidden_field :content, :value => @activity.content %>
             <%= form.hidden_field :date, :value => @parsed_date %>
             <%= form.hidden_field :time, :value => @parsed_time %>
+            <%= form.hidden_field :cal_attached, :value => @cal_attached %>
             <%= form.hidden_field :attachment_id, :value => @activity.id %>
             
             <%=  form.submit "Send", class: "btn btn-secondary btn-block" %>

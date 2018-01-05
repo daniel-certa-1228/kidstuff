@@ -28,7 +28,6 @@ class ActivitiesController < ApplicationController
                 render 'new'
             end
         rescue NoMethodError => e
-            # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ #{e}"
             flash[:error] = "Please attach an image!"
             redirect_to new_activity_path
         end
@@ -92,7 +91,6 @@ class ActivitiesController < ApplicationController
 
     def send_pdf
         @user = User.find(session[:user_id])
-
         @activity = Activity.find(params[:id])
         # logic to display 'n/a' for blank field        
         if @activity.title.blank?
@@ -119,7 +117,7 @@ class ActivitiesController < ApplicationController
         else
             @parsed_time = @activity.time.strftime( '%l:%M%p' )
         end
-
+        ##### GENERATE PDF ######################
         #connect to s3 bucket to get the jpg
         s3 = Aws::S3::Client.new(
             region: ENV.fetch('AWS_REGION'),
@@ -130,7 +128,14 @@ class ActivitiesController < ApplicationController
         @jpeg = s3.get_object(bucket: ENV.fetch('S3_BUCKET_NAME'), key: "activities/#{@activity.id}.original.jpg")
         @new_pdf = Magick::Image.from_blob(@jpeg.body.read)[0]
         #convert from blob to pdf & save to local disk
-        @new_pdf.write("kidstuff_activity_#{@activity.id}.pdf")
+        @new_pdf.write("#{Rails.root}/tmp/send_pics/kidstuff_activity_#{@activity.id}.pdf")
+        ##### GENERATE ICS ######################
+        if @activity.date.present?
+            ical_attachment(@activity.date, @activity.time, @activity.title, @activity.content, @activity.id)
+            @cal_attached = true
+        else
+            @cal_attached = false
+        end  
     end
 
     def mail_it
@@ -142,14 +147,24 @@ class ActivitiesController < ApplicationController
         @content = params[:activity][:content]
         @date = params[:activity][:date]
         @time = params[:activity][:time]
+        @cal_attached = (params[:activity][:cal_attached])
         @attachment = "kidstuff_activity_#{params[:activity][:attachment_id]}.pdf"
         @activity_id = params[:activity][:attachment_id]
 
+        if @cal_attached == "true"
+            @attachment_cal = "#{params[:activity][:title]} | ID ##{params[:activity][:attachment_id]}.ics"
+        else
+            @attachment_cal = []
+        end
+        
         if is_valid?(@email)
-            ActivityMailer.activity_mail(@email, @user_name, @user_email, @title, @child, @date, @time, @content, @attachment).deliver_later
+            ActivityMailer.activity_mail(@email, @user_name, @user_email, @title, @child, @date, @time, @content, @attachment, @attachment_cal).deliver_later
             redirect_to activities_path
             sleep 0.5 #half-second delay ensures that the file is still there when the email is sent
-            File.delete("#{@attachment}") #file deleted from root level after copy is sent
+            File.delete("#{Rails.root}/tmp/send_pics/#{@attachment}") #file deleted from temp after copy is sent
+            if @attachment_cal != []
+                File.delete("#{Rails.root}/tmp/ics_files/#{@attachment_cal}")#file deleted from temp after copy is sent
+            end
         else
             redirect_to send_activity_path(@activity_id), notice: 'You must enter a valid email address.'
         end
@@ -166,6 +181,7 @@ class ActivitiesController < ApplicationController
                 event.dtstart = @start_time
                 event.dtend = @start_time + 1.hour
                 event.summary = @activity.title
+                event.description = @activity.content
     
                 cal.add_event(event)            
                 cal.publish
@@ -199,5 +215,33 @@ class ActivitiesController < ApplicationController
     def is_valid?(email)
         regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
         regex.match?(email)
+    end
+
+    def ical_attachment(date, time, title, content, id)
+        if time.blank?
+            @start_time = DateTime.parse("#{date.strftime( '%Y-%m-%d' )} 08:00:00}")
+        else
+            @start_time = DateTime.parse("#{date.strftime( '%Y-%m-%d' )} #{time.strftime( '%H:%M:%S' )}")
+        end
+
+        if title == ""
+            @title = "Untitled Event"
+        else
+            @title = title
+        end
+
+        cal = Icalendar::Calendar.new           
+        event = Icalendar::Event.new
+        event.dtstart = @start_time
+        event.dtend = @start_time + 1.hour
+        event.summary = @title
+        event.description = content
+
+        cal.add_event(event)            
+        cal.publish
+
+        file = File.new("tmp/ics_files/#{@title} | ID ##{id}.ics", "w+")
+        file.write(cal.to_ical)
+        file.close
     end
 end
