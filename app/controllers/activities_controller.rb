@@ -85,7 +85,7 @@ class ActivitiesController < ApplicationController
 
     def search
         @search = params[:search_string]
-        @activities= Activity.fuzzy_content_search(@search)
+        @activities= Activity.fuzzy_content_search(@search).order('created_at DESC')
         render 'search'
     end
 

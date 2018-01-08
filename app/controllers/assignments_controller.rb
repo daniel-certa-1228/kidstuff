@@ -78,7 +78,7 @@ class AssignmentsController < ApplicationController
 
     def search
         @search = params[:search_string]
-        @assignments= Assignment.fuzzy_content_search(@search)
+        @assignments= Assignment.fuzzy_content_search(@search).order('created_at DESC')
         render 'search'
     end
 
