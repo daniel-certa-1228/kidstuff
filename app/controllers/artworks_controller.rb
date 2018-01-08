@@ -75,7 +75,7 @@ class ArtworksController < ApplicationController
 
     def search
         @search = params[:search_string]
-        @artworks= Artwork.fuzzy_title_search(@search)
+        @artworks= Artwork.fuzzy_title_search(@search).order('created_at DESC')
         render 'search'
     end
 
