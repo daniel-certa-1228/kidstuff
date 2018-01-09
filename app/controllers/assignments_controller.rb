@@ -34,7 +34,7 @@ class AssignmentsController < ApplicationController
 
     def edit
         @assignment = Assignment.find(params[:id])
-        @children = Child.all
+        @children = Child.where({user_id: session[:user_id]})
         #children loaded from DB to populate select menu
     end
 

@@ -33,7 +33,7 @@
             <p>
             <%= form.select(:child_id, include_blank: true) do %>
                 <%= content_tag(:option, "Select a Child", value: "") %>
-                <% Child.all.each do |c| -%>
+                <% Child.where({user_id: session[:user_id]}).each do |c| -%>
                 <%= content_tag(:option, c.child_name, value: c.id) %>
                 <% end %>
             <% end %>
